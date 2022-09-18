@@ -1,0 +1,366 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+#header{
+  position: fixed;
+  transition: 0.4s ease;
+  width: 100%;
+  display: block;
+  z-index: 99;
+}
+body{
+  font-family: 'Times New Roman', Times, serif;
+}
+a {
+  color:blue;
+  text-decoration: none;
+}
+.btn {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: blue;
+  background-color: white;
+  margin-top: 5px;
+  padding: 5px 15px;
+  border: 2px solid blue;
+  transition: 0.3s ease-in;
+  margin-right: 10px;
+}
+.btn:hover {
+  background-color: blue;
+  color: white;
+  border: 2px solid white;
+}
+.navbar{
+  height: 70px;
+  width: 100%;
+  padding: 12px 0px 5px 10px;
+  background-color: #070331;
+  position: relative;
+  border-bottom: 4px solid blue;
+}
+.navbar .nav-header{
+  display: inline;
+}
+.navbar .nav-header .nav-logo{
+  display: inline-block;
+  margin-top: 5px;
+}
+.navbar .nav-links{
+  display: inline;
+  font-size: 18px;
+  float: right;
+}
+ 
+.navbar .nav-links .loginBtn{
+  display: inline-block;
+  padding: 5px 15px;
+  margin-left: 20px;
+  font-size: 17px;
+  color: blue;
+  background-color: white;
+  border: 2px solid blue;
+}
+.navbar .nav-links a{
+  padding: 10px 12px;
+  text-decoration: none;
+  font-weight: 550;
+  color: white;
+}
+.navbar .nav-links .nav-btn a:hover {
+  background-color: blue;
+  color: white;
+}
+/* Hover effects */
+.navbar .nav-links a:hover {
+  background-color: blue;
+}
+ 
+/* responsive navbar toggle button */
+.navbar #nav-check, .navbar .nav-btn{
+  display: none;
+}
+
+/* Catagorires Grid */
+.grid-container {
+  display: grid;
+  grid-template: auto / auto auto auto;
+  margin: 4% 4% 0 4%;
+  grid-gap: 10% 10%;
+  background-color: white;
+}
+.grid-container > div a {
+  background-color: white;
+  padding: 20px 30px;
+  font-size: 24px;
+  align-items: center ;
+  box-shadow: 7px 7px 8px 7px rgba(0, 0, 0, 0.2);
+  font-size: 26px;
+  border-bottom: 6px solid blue;
+  border-radius: 10px;
+  z-index: 0;
+  position: relative;
+  transition: 0.9s ease;
+  overflow: hidden;
+  color: #000;
+  text-decoration: none;
+  display: inline-flex;
+}
+.grid-container > div img {
+  height: 70px;
+  width: 70px;
+}
+
+.grid-container >  div a:hover, .grid-container > div a:visited {
+  transform: translateY(-7px);
+  background-color: blue;
+  color: white;
+  transition: 0.9s ease;
+}
+
+/* Search Bar */
+#search {
+  margin: auto;
+  background-color: white;
+  width: 80%;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items:center;
+  box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.2);
+  border-left: 6px solid blue;
+ }
+ 
+ input {
+  all: unset;
+  font: 16px system-ui;
+  color: blue;
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+}
+
+::placeholder {
+  opacity: 0.9; 
+}
+
+.searchicon {
+  color: blue;
+  fill: currentColor;
+  width: 55px;
+  height: 40px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  
+}
+
+.searchbtn {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+}
+
+/*footer design*/
+
+.footer {
+  background-color: #070331;
+  color: white;
+  overflow: hidden;
+  margin-top: 10%;
+  padding: 10px 20px;
+  border-top: 6px solid blue;
+}
+.footer .foot1 {
+  display: flex;
+  
+}
+
+.foot1 > div {
+  padding: 2% 8%;
+}
+.foot2 {
+  display: flex;
+  margin: 3% 8%;
+}
+.foot2a {
+  display: block;
+  margin-right: 1%;
+  padding-right: 10%;
+}
+.foot3 {
+ display: flex;
+}
+.foot3y {
+  display: flex;
+  margin: 0 0;
+  padding: 0 0;
+}
+.foot3 > div {
+  padding: 0% 8%;
+}
+.footer .foot3 .foot3y .foot3b {
+  padding-top: 27%;
+}
+.footer .foot3 .foot3y .foot3a span, .footer .foot3 .foot3y .foot3b span {
+  display: block;
+  padding-top: 10px;
+}
+.footer a {
+  color: lime;
+  font-size: 18px;
+  transition: .8s ease;
+  cursor: pointer;
+  display: block;
+}
+.footer .foot3 .foot3y a:hover {
+  color: blue;
+  transform: translate(19px, -5px)
+  scale(125%)
+}
+.copy {
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-top: 4px solid blue;
+  padding: 8% 0;
+}
+@media (max-width: 700px)
+{
+  .footer .foot1, .footer .foot2, .footer .foot3 {
+  display: inline;
+}
+.foot3 > div {
+  padding: 1% 1%;
+}
+.foot3y{
+  border-bottom: 1px solid white;
+}
+.footer .foot1 > div {
+  padding: 20px 5px;
+}
+.footer .foot2 > div {
+  padding: 10px 5px;
+}
+.footer .foot2 .foot2a {
+  padding-right: 3%
+}
+.footer .foot3 .foot3y > div {
+  margin: 0 0;
+  padding: 0 0;
+}
+  .footer .foot3 .foot3y .foot3b {
+    padding: 18% 15%;
+  }
+.footer .foot3 .foot3c {
+  margin: 0;
+}
+   .navbar .nav-btn {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .navbar .nav-btn label {
+    display: inline-block;
+    width: 40px;
+    height: 42px;
+    margin-top: 15px;
+    margin-right: 10px;
+    border: 4px solid blue;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-top: 5px;
+  }
+  .navbar .nav-btn label span {
+    display: block;
+    height: 10px;
+    width: 20px;
+    border-top: 4px solid white;
+  }
+  .navbar .nav-links{
+    position: absolute;
+    display: block;
+    text-align: center;
+    background-color: rgb(9, 14, 90);
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 66px;
+    right: 0px;
+    border-left: 4px solid blue;
+    border-bottom: 4px solid blue;
+  }
+  .navbar .nav-links a {
+    display: block;
+  }
+ 
+  /* when nav toggle button not checked */
+  .navbar #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+ 
+  /* when nav toggle button is checked */
+  .navbar #nav-check:checked ~ .nav-links {
+    height: calc(50vh - 70px);
+    overflow-y: auto;
+  }
+  .navbar .nav-links .loginBtn {
+    padding: 10px 40px ;
+    margin: 20px;
+    font-size:  18px;
+    font-weight: bold;
+    color: rgb(9, 14, 90);
+  }
+  
+  /* Catagorires Grid */
+  .grid-container {
+    margin: 5px;
+    grid-template: auto  auto / auto auto;
+    grid-gap: 15px 8px;
+}
+
+.grid-container > div a {
+  padding-left: 8px;
+  font-size: 20px;
+  border-bottom: 4px solid blue;
+}
+.grid-container > div img {
+  height: 45px;
+  width: 45px;
+}
+ 
+}
+input[type=text], input[type=submit] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border-left: 6px solid blue;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+
+input[type=submit] {
+  background-color: white;
+  color: white;
+  border: none;
+}
+
+input[type=submit]:hover {
+  background-color: deepskyblue;
+}
+
+input[type=submit] {
+  background-color: blue;
+  color: white;
+  border: none;
+  text-align: center;
+}
