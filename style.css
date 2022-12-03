@@ -109,6 +109,7 @@ a {
   color: #000;
   text-decoration: none;
   display: inline-flex;
+  width: 100%;
 }
 .grid-container > div img {
   height: 70px;
