@@ -1,0 +1,77 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  posts         Post[]  
+  comments      Comment[]
+}
+
+
+model Post {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  content     String
+  category    String
+  coverImage  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String   @db.ObjectId
+  author      User     @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  viewCount   Int      @default(0)
+}
+
+
+
+
+model Comment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId String   @db.ObjectId
+  postId   String   @db.ObjectId
+  author   User     @relation(fields: [authorId], references: [id])
+  post     Post     @relation(fields: [postId], references: [id])
+}
