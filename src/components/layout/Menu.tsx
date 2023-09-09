@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { TbBrandAzure } from "react-icons/tb";
@@ -49,9 +48,9 @@ export default function Menu({ email }: { email: string | null | undefined }) {
             </div>
             <hr />
             <div className="my-4 flex flex-col gap-4 px-8">
-              <Link href={"/components"}>Categories</Link>
-              <Link href={"/templates"}>Trending</Link>
-              <Link href={"/documentation"}>Documentation</Link>
+              <span onClick={HandleClick}>Categories</span>
+              <span>Trending</span>
+              <span>Documentation</span>
             </div>
             <hr />
             <div className="px-8 py-6">

@@ -43,6 +43,7 @@ function Sidebar() {
           <Link href={"/category/laptop"}>
             <span>Laptop</span>
           </Link>
+          
         </div>
       </div>
 

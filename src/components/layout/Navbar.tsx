@@ -60,7 +60,7 @@ export default function Navbar() {
           <CategoryHover />
           <Tranding />
           <span>About Us</span>
-          <span>Documentation</span>
+          <Link href={"/documentation"}>Documentation</Link>
         </span>
       </nav>
 

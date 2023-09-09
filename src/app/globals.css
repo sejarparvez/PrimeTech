@@ -23,3 +23,7 @@ body {
 .animate-shake {
   animation: shake 0.3s ease-in-out;
 }
+
+.active-link {
+  @apply text-blue-600 dark:text-blue-500 font-semibold;
+}
