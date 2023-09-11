@@ -1,16 +1,18 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CommentsList from "./CommentList";
 
-interface Comment {
-  id: string;
-  content: string;
+interface CommentFormProps {
+  postId: string;
 }
 
-function CommentForm({ postId }: { postId: string }) {
+function CommentForm({ postId }: CommentFormProps) {
   const [comment, setComment] = useState("");
+  const [added, setAdded] = useState(false);
   const { data: session } = useSession();
   const name = session?.user?.name;
 
@@ -28,6 +30,7 @@ function CommentForm({ postId }: { postId: string }) {
     };
 
     try {
+      toast.loading("Please wait while we save your comment to the database.");
       const response = await fetch(`/api/comment`, {
         method: "POST",
         headers: {
@@ -37,10 +40,15 @@ function CommentForm({ postId }: { postId: string }) {
       });
 
       if (response.ok) {
-        // Handle success, maybe reset the comment field
+        toast.dismiss();
+        toast.success("Your comment has been submitted.");
+        setAdded(true);
+        // Handle success, reset the comment field
         setComment("");
       } else {
         // Handle error response
+        toast.dismiss();
+        toast.error("There was an error submitting your comment.");
         const responseData = await response.json();
         // You can show the error message from responseData
       }
@@ -53,7 +61,7 @@ function CommentForm({ postId }: { postId: string }) {
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden ">
-      <div className="flex flex-col gap-4 rounded-lg bg-white p-4 dark:bg-black">
+      <div className="flex flex-col gap-4 rounded-lg bg-slate-100 p-4 dark:bg-black">
         <span className="text-2xl font-semibold">Leave A Reply</span>
         {name ? (
           <div className="flex flex-col gap-6">
@@ -101,7 +109,8 @@ function CommentForm({ postId }: { postId: string }) {
           </div>
         )}
       </div>
-      <CommentsList postId={postId} />
+      <CommentsList postId={postId} onCommentAdded={added} />
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

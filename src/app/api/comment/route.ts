@@ -15,8 +15,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const { content, postId } = await req.json();
 
-    console.log({ content, postId });
-
     if (!content || !postId) {
       return new NextResponse("Content and postId are required", {
         status: 400,
@@ -50,8 +48,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
         author: {
           select: {
             name: true,
+            id: true,
+            image: true,
           },
         },
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
 

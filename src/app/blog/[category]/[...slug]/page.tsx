@@ -142,10 +142,10 @@ export default function Post({ params }: PageProps) {
   return (
     <>
       <div className="flex flex-col-reverse md:flex-row">
-        <div className="md:sticky top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
+        <div className="md:sticky z-20 top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
           <Sidebar />
         </div>
-        <div className="flex w-full -z-20 relative">
+        <div className="flex w-full relative">
           <div className="flex flex-col md:gap-4 mx-1 md:mx-4">
             <div className="rounded-2xl py-1">
               <div className="mb-10 rounded-lg  py-4 px-2 md:px-4">
@@ -183,11 +183,10 @@ export default function Post({ params }: PageProps) {
                     <div className="mx-auto flex items-center justify-center md:justify-end">
                       <div>
                         <Link
+                          className="mr-4 flex gap-1 rounded-lg bg-black px-3 py-2 font-bold text-white hover:bg-primary-200 dark:border"
                           href={`/editpost/${params.category}/${params.slug}`}
                         >
-                          <button className="mr-4 flex gap-1 rounded-lg bg-black px-3 py-2 font-bold text-white hover:bg-primary-200 dark:border">
-                            Edit Post
-                          </button>
+                          Edit Post
                         </Link>
                       </div>
                       <div>
@@ -203,7 +202,7 @@ export default function Post({ params }: PageProps) {
                 </div>
               </div>
               <Image
-                className="mx-auto rounded-lg object-cover h-60 md:h-96"
+                className="mx-auto rounded-lg w-full object-cover h-60 md:h-96"
                 src={`${post.coverImage}`}
                 alt=""
                 width={1000}
@@ -217,7 +216,7 @@ export default function Post({ params }: PageProps) {
             <div className="my-20">
               <CommentForm postId={post.id} />
             </div>
-            {/* <div className="w-full lg:hidden  -right-10 rounded-lg  md:top-14 md:h-[86%] border dark:border-bdr-200">
+            <div className="w-full lg:hidden  -right-10 rounded-lg  md:top-14 md:h-[86%] border dark:border-bdr-200">
               <div className="flex flex-col justify-between h-[70%]">
                 <div className=" h-[76%] rounded-2xl ">
                   <AuthorCard
@@ -230,9 +229,9 @@ export default function Post({ params }: PageProps) {
                   Advertise
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
-          <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block -right-10 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
+          <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
             <div className="flex flex-col justify-between h-[70%]">
               <div className=" h-[76%] rounded-2xl ">
                 <AuthorCard

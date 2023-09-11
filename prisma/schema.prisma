@@ -43,35 +43,43 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]  
+  posts         Post[]
   comments      Comment[]
 }
 
-
 model Post {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  content     String
-  category    String
-  coverImage  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  authorId    String   @db.ObjectId
-  author      User     @relation(fields: [authorId], references: [id])
-  comments    Comment[]
-  viewCount   Int      @default(0)
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  content       String
+  category      String
+  coverImage    String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  authorId      String         @db.ObjectId
+  author        User           @relation(fields: [authorId], references: [id])
+  comments      Comment[]
+  viewCount     Int            @default(0)
+  notifications Notification[]
 }
 
-
-
-
 model Comment {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  content  String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  authorId String   @db.ObjectId
-  postId   String   @db.ObjectId
-  author   User     @relation(fields: [authorId], references: [id])
-  post     Post     @relation(fields: [postId], references: [id])
+  authorId  String   @db.ObjectId
+  postId    String   @db.ObjectId
+  author    User     @relation(fields: [authorId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+}
+
+model Notification {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  type       String
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  postId     String   @db.ObjectId
+  createdAt  DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id])
 }

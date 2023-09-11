@@ -1,11 +1,13 @@
 "use client";
-import { Link } from "react-scroll";
+import Notification from "@/components/notification/Notification";
 import Scrollspy from "react-scrollspy";
 
+import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll";
 export default function Documentation() {
   return (
-    <div className="flex mx-40 gap-20">
-      <div className="w-3/12 flex flex-col gap-5 fixed">
+    <div className="flex mx-3 md:mx-4 lg:mx-40 gap-20">
+      <div className="w-3/12  flex-col gap-5 hidden md:flex fixed">
         <div className="font-bold text-xl">Table of contents</div>
         <Scrollspy
           items={[
@@ -15,36 +17,47 @@ export default function Documentation() {
             "do-we-support-payment",
           ]}
           currentClassName="active-link"
-          offset={-100} // Adjust this offset as needed
+          offset={-100}
+          className="flex flex-col gap-4 [&>*]:cursor-pointer"
         >
           <li>
-            <Link to="introduction" smooth={true} spy={true} offset={-100}>
+            <ScrollLink
+              to="introduction"
+              smooth={true}
+              spy={true}
+              offset={-100}
+            >
               Introduction
-            </Link>
+            </ScrollLink>
           </li>
           <li>
-            <Link to="what-we-do" smooth={true} spy={true} offset={-100}>
+            <ScrollLink to="what-we-do" smooth={true} spy={true} offset={-100}>
               What we do
-            </Link>
+            </ScrollLink>
           </li>
           <li>
-            <Link to="whats-our-goal" smooth={true} spy={true} offset={-100}>
+            <ScrollLink
+              to="whats-our-goal"
+              smooth={true}
+              spy={true}
+              offset={-100}
+            >
               Whats our goal
-            </Link>
+            </ScrollLink>
           </li>
           <li>
-            <Link
+            <ScrollLink
               to="do-we-support-payment"
               smooth={true}
               spy={true}
               offset={-100}
             >
               Do we support payment
-            </Link>
+            </ScrollLink>
           </li>
         </Scrollspy>
       </div>
-      <div className="flex flex-col gap-10 w-9/12 ml-60">
+      <div className="flex flex-col gap-10 md:w-9/12 md:ml-60">
         <div id="introduction">
           <h1 className="font-bold text-2xl mb-4">Introduction</h1>
           <p>
@@ -116,6 +129,9 @@ export default function Documentation() {
             ipsam amet corrupti ut repellat optio ab ad, pariatur aperiam! Illo.
           </p>
         </div>
+        <Notification />
+
+        <Link href="/blog">Blog</Link>
       </div>
     </div>
   );
