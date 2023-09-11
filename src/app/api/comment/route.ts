@@ -64,3 +64,59 @@ export async function GET(req: NextRequest, res: NextResponse) {
     return new NextResponse("An error occurred", { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest, res: NextResponse) {
+  const token = await getToken({ req, secret });
+  const authorId = token?.sub;
+  const isAdmin = token?.email === process.env.NEXT_PUBLIC_ADMIN;
+
+  if (!token || (!authorId && !isAdmin)) {
+    // User is not authenticated or authorId is missing and not an admin
+    return new NextResponse("User not logged in or authorId missing", {
+      status: 401, // Unauthorized status
+    });
+  }
+
+  try {
+    const search = req.nextUrl;
+    const commentId = search.searchParams.get("id");
+
+    if (!commentId) {
+      return new NextResponse("CommentId is required", {
+        status: 400,
+      });
+    }
+
+    const comment = await prisma.comment.findUnique({
+      where: {
+        id: commentId,
+      },
+    });
+
+    if (!comment) {
+      return new NextResponse("Comment not found", {
+        status: 404, // Not Found status
+      });
+    }
+
+    if (comment.authorId === authorId || isAdmin) {
+      // Check if the user is the author or an admin
+      await prisma.comment.delete({
+        where: {
+          id: commentId,
+        },
+      });
+
+      return new NextResponse(null, {
+        status: 204, // No Content status
+      });
+    } else {
+      return new NextResponse("You are not authorized to delete this comment", {
+        status: 403, // Forbidden status
+      });
+    }
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    return new NextResponse("An error occurred", { status: 500 });
+  }
+}

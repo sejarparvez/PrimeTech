@@ -2,7 +2,6 @@
 import Notification from "@/components/notification/Notification";
 import Scrollspy from "react-scrollspy";
 
-import Link from "next/link";
 import { Link as ScrollLink } from "react-scroll";
 export default function Documentation() {
   return (
@@ -130,8 +129,6 @@ export default function Documentation() {
           </p>
         </div>
         <Notification />
-
-        <Link href="/blog">Blog</Link>
       </div>
     </div>
   );
