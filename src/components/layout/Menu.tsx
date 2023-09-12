@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { TbBrandAzure } from "react-icons/tb";
@@ -40,26 +41,32 @@ export default function Menu({ email }: { email: string | null | undefined }) {
           NavOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="z-50  flex w-9/12 flex-col gap-4 bg-white dark:bg-gray-900 [&>*]:cursor-pointer hover:[&>*]:text-indigo-600">
-          <div>
-            <div className="flex items-center justify-between px-8 py-5 text-primary-200 dark:text-primary-100">
+        <div className="flex w-9/12 flex-col gap-4 bg-white dark:bg-gray-900 z-50">
+          <div className="flex items-center justify-between px-8 py-5 text-primary-200 dark:text-primary-100">
+            <Link href={"/"}>
               <TbBrandAzure size={30} />
-              <AiOutlineClose size={24} onClick={HandleClick} />
-            </div>
-            <hr />
-            <div className="my-4 flex flex-col gap-4 px-8">
-              <span onClick={HandleClick}>Categories</span>
-              <span>Trending</span>
-              <span>Documentation</span>
-            </div>
-            <hr />
-            <div className="px-8 py-6">
-              {email ? (
-                <Btn text="Dashboard" link="/dashboard" />
-              ) : (
-                <Btn text="Log in" link="/signin" />
-              )}
-            </div>
+            </Link>
+            <AiOutlineClose size={24} onClick={HandleClick} />
+          </div>
+          <hr />
+          <div className="my-4 flex flex-col gap-4 px-8 hover:bg-black">
+            <Link href={"/categories"} onClick={HandleClick}>
+              Categories
+            </Link>
+            <Link href={"/category/hotpost"} onClick={HandleClick}>
+              Trending
+            </Link>
+            <Link href={"/documentation"} onClick={HandleClick}>
+              Documentation
+            </Link>
+          </div>
+          <hr />
+          <div className="px-8 py-6">
+            {email ? (
+              <Btn text="Dashboard" link="/dashboard" />
+            ) : (
+              <Btn text="Log in" link="/signin" />
+            )}
           </div>
         </div>
       </div>
