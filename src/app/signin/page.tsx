@@ -75,6 +75,30 @@ export default function Login() {
     }
   };
 
+  const handleGitHubLogin = async () => {
+    try {
+      const loadingToastId = toast.loading("Logging in with GitHub...", {
+        autoClose: false,
+        theme: "dark",
+      });
+
+      const response = await signIn("github", {
+        callbackUrl: `${window.location.origin}/dashboard`,
+      });
+
+      toast.dismiss(loadingToastId);
+
+      if (response?.error) {
+        toast.error("GitHub sign-in failed.");
+      }
+
+      return response;
+    } catch (error) {
+      console.error("GitHub sign-in error:", error);
+      throw error;
+    }
+  };
+
   if (session) {
     return (
       <div>
@@ -102,7 +126,10 @@ export default function Login() {
               <span className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border">
                 <FaTwitter />
               </span>
-              <span className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border">
+              <span
+                className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border"
+                onClick={handleGitHubLogin}
+              >
                 <FaGithub />
               </span>
             </div>

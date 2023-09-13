@@ -1,8 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
 
 const prisma = new PrismaClient();
+
+const githubClientId = process.env.GITHUB_CLIENT_ID;
+const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+
+console.log(githubClientId);
+
+if (!githubClientId || !githubClientSecret) {
+  throw new Error("GitHub credentials are missing.");
+}
 
 export const authOptions = {
   providers: [
@@ -40,6 +50,10 @@ export const authOptions = {
 
         return user;
       },
+    }),
+    GitHubProvider({
+      clientId: githubClientId,
+      clientSecret: githubClientSecret,
     }),
   ],
 

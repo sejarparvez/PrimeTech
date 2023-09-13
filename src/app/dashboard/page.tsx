@@ -29,7 +29,7 @@ type DashboardDataProps = {
 };
 
 export default function Dashboard() {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const router = useRouter();
   const [dashboardData, setDashboardData] = useState<DashboardDataProps>({
     user: {
@@ -71,9 +71,10 @@ export default function Dashboard() {
     }
   };
 
-  const name = dashboardData?.user?.name;
-  const email = dashboardData?.user?.email;
+  const name = session?.user?.name;
+  const email = session?.user?.email;
   const id = dashboardData.user.id;
+  const image = session?.user?.image;
 
   return (
     <div className="flex flex-col md:gap-10 mt-10">
@@ -81,9 +82,9 @@ export default function Dashboard() {
         <div className="flex flex-col gap-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-6  w-full  bg-slate-100 dark:bg-gray-900">
             <div className="flex items-center border justify-center col-span-3 md:col-span-1 h-full w-full">
-              {dashboardData.user.image ? (
+              {image ? (
                 <Image
-                  src={dashboardData.user.image}
+                  src={image}
                   alt=""
                   height={500}
                   width={500}
@@ -106,15 +107,17 @@ export default function Dashboard() {
                   </button>
                 </Link>
               </div>
+              {id && (
+                <div>
+                  <Link href={`/editprofile/?userid=${id}`}>
+                    <button className="font-bold flex gap-4 items-center justify-center px-6 py-2 rounded-lg bg-primary-200 hover:bg-gray-800 text-white border">
+                      Edit Profile
+                      <FaUserEdit size={20} />
+                    </button>
+                  </Link>
+                </div>
+              )}
 
-              <div>
-                <Link href={`/editprofile/?userid=${id}`}>
-                  <button className="font-bold flex gap-4 items-center justify-center px-6 py-2 rounded-lg bg-primary-200 hover:bg-gray-800 text-white border">
-                    Edit Profile
-                    <FaUserEdit size={20} />
-                  </button>
-                </Link>
-              </div>
               <div className="flex items-center justify-center">
                 <button
                   onClick={handleLogout}
