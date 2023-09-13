@@ -4,6 +4,7 @@ import RecentPostModel from "@/components/core/RecentPostModel";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiSolidEdit } from "react-icons/bi";
 import { FaPowerOff, FaUserEdit } from "react-icons/fa";
@@ -29,6 +30,7 @@ type DashboardDataProps = {
 
 export default function Dashboard() {
   const { status } = useSession();
+  const router = useRouter();
   const [dashboardData, setDashboardData] = useState<DashboardDataProps>({
     user: {
       id: "",
@@ -65,6 +67,7 @@ export default function Dashboard() {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
     if (confirmLogout) {
       signOut();
+      router.push("/");
     }
   };
 

@@ -49,7 +49,7 @@ export default function Menu({ email }: { email: string | null | undefined }) {
             <AiOutlineClose size={24} onClick={HandleClick} />
           </div>
           <hr />
-          <div className="my-4 flex flex-col gap-4 px-8 hover:bg-black">
+          <div className="my-4 flex flex-col gap-4 px-8 [&>*]:hover:underline [&>*]:hover:font-semibold">
             <Link href={"/categories"} onClick={HandleClick}>
               Categories
             </Link>
@@ -61,7 +61,7 @@ export default function Menu({ email }: { email: string | null | undefined }) {
             </Link>
           </div>
           <hr />
-          <div className="px-8 py-6">
+          <div className="px-8 py-6" onClick={HandleClick}>
             {email ? (
               <Btn text="Dashboard" link="/dashboard" />
             ) : (
