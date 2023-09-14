@@ -12,6 +12,7 @@ interface Post {
     name: string;
   };
   createdAt: string;
+  updatedAt: string;
   category: string;
 }
 
@@ -56,7 +57,7 @@ function RecentPost() {
               summary={post.content}
               category={post.category}
               author={post.author}
-              createdAt={post.createdAt}
+              createdAt={post.updatedAt}
               key={post.id}
               _id={post.id}
             />

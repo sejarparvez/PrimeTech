@@ -166,7 +166,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
       data: updatedPostData,
     });
 
-    return new NextResponse("Post updated successfully", { status: 200 });
+    return new NextResponse(JSON.stringify(updatedPost), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Error:", error);
     return new NextResponse("An error occurred", { status: 500 });

@@ -16,6 +16,7 @@ interface PageProps {
 
 function EditPost({ params }: PageProps) {
   const router = useRouter();
+
   const [id, setId] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -47,6 +48,11 @@ function EditPost({ params }: PageProps) {
     );
   }
 
+  // Function to properly encode a string for URLs
+  const encodeForUrl = (str: string) => {
+    return encodeURIComponent(str).replace(/%20/g, "_");
+  };
+
   async function UpdatePost(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
 
@@ -73,15 +79,32 @@ function EditPost({ params }: PageProps) {
       data.set("file", files?.[0]);
     }
 
-    toast.loading("Please wait while we save your post to the database.");
+    toast.loading("Please wait while we update your post.");
 
-    await fetch(`/api/post`, {
-      method: "PUT",
-      body: data,
-      credentials: "include",
-    });
-    toast.dismiss();
-    router.push("/");
+    try {
+      const response = await fetch(`/api/post`, {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        const uri = responseData.title;
+        toast.dismiss();
+        const encodedUri = uri ? encodeForUrl(uri) : "";
+        toast.success("Post Updated successfully");
+        router.push(`/blog/${responseData.category}/${encodedUri}`);
+      } else {
+        console.error("Failed to update the post. Status:", response.status);
+        toast.dismiss();
+        toast.error("Post Updating failed");
+      }
+    } catch (error) {
+      console.error("An error occurred while updating the post:", error);
+      toast.dismiss();
+      toast.error("An error occurred");
+    }
   }
 
   return (
