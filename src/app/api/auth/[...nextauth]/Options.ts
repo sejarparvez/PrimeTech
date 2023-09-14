@@ -8,8 +8,6 @@ const prisma = new PrismaClient();
 const githubClientId = process.env.GITHUB_CLIENT_ID;
 const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
 
-console.log(githubClientId);
-
 if (!githubClientId || !githubClientSecret) {
   throw new Error("GitHub credentials are missing.");
 }

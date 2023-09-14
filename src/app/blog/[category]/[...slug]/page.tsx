@@ -5,6 +5,7 @@ import Loading from "@/components/common/loading/Loading";
 import CommentForm from "@/components/core/Comment";
 import Sidebar from "@/components/layout/SideBar";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -84,7 +85,7 @@ export default function Post({ params }: PageProps) {
     );
 
     if (confirmed) {
-      setIsDeleting(true); // Set the state to indicate deletion is in progress
+      setIsDeleting(true);
 
       try {
         const response = await fetch(
@@ -95,14 +96,14 @@ export default function Post({ params }: PageProps) {
         );
 
         if (response.ok) {
-          router.push("/"); // Redirect on successful deletion
+          router.push("/");
         } else {
           console.error("Error deleting post");
         }
       } catch (error) {
         console.error("Error deleting post:", error);
       } finally {
-        setIsDeleting(false); // Reset the state when deletion is done
+        setIsDeleting(false);
       }
     }
   };
@@ -136,11 +137,36 @@ export default function Post({ params }: PageProps) {
         return "th";
     }
   };
+  function stripHtmlTags(html: string) {
+    return html.replace(/(<([^>]+)>)/gi, "");
+  }
+
+  const cleanedContent = stripHtmlTags(post.content);
 
   const userInfo = session?.user?.email;
+  const dynamicDescription = cleanedContent.substring(0, 150);
 
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta
+          name="description"
+          content="Your concise post description here."
+        />
+        {/* Open Graph tags for Facebook */}
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={dynamicDescription} />
+        <meta property="og:image" content={post.coverImage} />
+        <meta
+          property="og:url"
+          content={`${process.env.SITE_URL}/${params.category}/${params.slug}`}
+        />
+        <meta property="og:type" content="article" />
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@yourtwitterhandle" />
+      </Head>
       <div className="flex flex-col-reverse md:flex-row">
         <div className="md:sticky z-20 top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
           <Sidebar />
