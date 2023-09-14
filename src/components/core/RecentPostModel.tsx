@@ -75,7 +75,7 @@ function RecentPostModel({
         </div>
       </Link>
       <div className="mx-auto w-full rounded-xl border-b-4 border-primary-200 dark:border-primary-100 bg-slate-100 p-3 dark:bg-gray-900 md:hidden">
-        <Link href={`/${category}/${encodedTitle}`}>
+        <Link href={`/blog/${category}/${encodedTitle}`}>
           <div className="flex flex-col">
             <div className="flex flex-col gap-4 md:relative">
               <h1 className="text-2xl font-bold">{title}</h1>
