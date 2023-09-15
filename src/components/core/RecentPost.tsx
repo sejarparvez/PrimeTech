@@ -7,7 +7,7 @@ interface Post {
   id: string;
   coverImage: string;
   title: string;
-  content: string; // Added content property
+  content: string;
   author: {
     name: string;
   };
@@ -19,15 +19,17 @@ interface Post {
 function RecentPost() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const pageSize = 3; // You can adjust this based on your needs
+  const pageSize = 10;
 
   useEffect(() => {
     setIsLoading(true);
     fetch(`api/allpost?page=${currentPage}&pageSize=${pageSize}`)
       .then((response) => response.json())
-      .then((posts) => {
-        setPosts(posts);
+      .then((data) => {
+        setPosts(data.posts);
+        setTotalPages(Math.ceil(data.totalPostsCount / pageSize));
         setIsLoading(false);
       })
       .catch(() => {
@@ -36,7 +38,6 @@ function RecentPost() {
       });
   }, [currentPage]);
 
-  const totalPages = Math.ceil(posts.length / pageSize);
   const jumpToPageOptions = Array.from(
     { length: totalPages },
     (_, index) => index + 1

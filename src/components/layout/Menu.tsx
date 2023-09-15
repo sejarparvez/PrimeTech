@@ -37,7 +37,7 @@ export default function Menu({ email }: { email: string | null | undefined }) {
         ></span>
       </div>
       <div
-        className={`fixed top-0 right-0 z-10 flex h-screen w-full transform justify-end  bg-slate-200 bg-opacity-5 backdrop-blur-sm transition duration-300 ease-out  ${
+        className={`fixed top-0 right-0 z-50 flex h-screen w-full transform justify-end  bg-slate-200 bg-opacity-5 backdrop-blur-sm transition duration-300 ease-out  ${
           NavOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

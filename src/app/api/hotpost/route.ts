@@ -16,9 +16,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
         category: true,
         content: true,
         createdAt: true,
+        updatedAt: true,
         author: {
           select: {
-            name: true, // Include the author's name
+            name: true,
           },
         },
       },

@@ -27,6 +27,7 @@ interface Post {
     image: string;
   };
   createdAt: string;
+  updatedAt: string;
   category: string;
   coverImage: string;
 }
@@ -190,7 +191,7 @@ export default function Post({ params }: PageProps) {
                         </Link>
                         At{" "}
                         <span className=" font-medium">
-                          {formatDate(post.createdAt)}
+                          {formatDate(post.updatedAt)}
                         </span>
                       </span>
                     </span>

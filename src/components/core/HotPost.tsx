@@ -11,6 +11,7 @@ interface Post {
     name: string;
   };
   createdAt: string;
+  updatedAt: string;
   title: string;
 }
 
@@ -89,7 +90,7 @@ const HotPost = () => {
           key={post.id}
           cover={post.coverImage}
           author={post.author.name}
-          time={formatDate(post.createdAt)}
+          time={formatDate(post.updatedAt)}
           heading={post.title}
           id={post.id}
         />
