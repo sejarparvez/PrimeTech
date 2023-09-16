@@ -8,7 +8,7 @@ import { GrFacebook } from "react-icons/gr";
 import { TbBrandAzure } from "react-icons/tb";
 import Btn from "../common/button/Btn";
 import CategoryHover from "../hover/CategoryHover";
-import Tranding from "../hover/Tranding";
+import Trending from "../hover/Trending";
 import Menu from "./Menu";
 import SearchBar from "./SearchBar";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -38,7 +38,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`z-[999] flex h-14 w-full justify-between ${
+      className={`z-50 flex h-14 w-full justify-between ${
         visible ? "opacity-100 backdrop-blur-md" : "opacity-0"
       } transition-transform duration-500 ease-in-out bg-white dark:bg-primary-200 bg-opacity-80 dark:bg-opacity-80 items-center border-b border-bdr-100 dark:border-bdr-200 lg:px-7 px-2 fixed top-0 left-0`}
     >
@@ -58,7 +58,7 @@ export default function Navbar() {
         </span>
         <span className="hidden xl:flex items-center space-x-4 [&>*]:cursor-pointer hover:[&>*]:text-primary-200 dark:hover:[&>*]:text-lightgray-100">
           <CategoryHover />
-          <Tranding />
+          <Trending />
           <span>About Us</span>
           <Link href={"/documentation"}>Documentation</Link>
         </span>
@@ -90,7 +90,7 @@ export default function Navbar() {
             <Btn text="Log in" link="/signin" />
           )}
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden z-50">
           <Menu email={email} />
         </div>
       </div>

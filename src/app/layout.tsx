@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 interface RootLayoutProps {
   children: ReactNode;
-  session: any; // Replace 'any' with the actual type of your 'session' prop
+  session: any;
 }
 
 export default function RootLayout({ children, session }: RootLayoutProps) {
@@ -23,7 +23,9 @@ export default function RootLayout({ children, session }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         <Provider session={session}>
-          <Navbar />
+          <div className="z-50">
+            <Navbar />
+          </div>
           <div className="my-20">{children}</div>
           <Footer />
         </Provider>
