@@ -34,8 +34,8 @@ export default function SearchBar() {
 
   const debouncedSearch = useCallback((query: string) => {
     if (query.length >= 4) {
-      setIsLoading(true); // Set loading to true when request starts
-      // Make an API request to your search endpoint with the query
+      setIsLoading(true);
+
       fetch(`/api/search?query=${query}`)
         .then((response) => response.json())
         .then((data) => {
@@ -46,7 +46,7 @@ export default function SearchBar() {
           setSearchResults([]);
         })
         .finally(() => {
-          setIsLoading(false); // Set loading to false when request is complete
+          setIsLoading(false);
         });
     } else {
       setSearchResults([]);
@@ -137,7 +137,7 @@ export default function SearchBar() {
               <p className="mt-4 text-gray-500">Loading...</p>
             ) : searchQuery === "" ? (
               <p className="mt-4 text-gray-500">
-                Start typing to see the search results.
+                Type minimum 3 character to see the search results.
               </p>
             ) : searchResults.length > 0 ? (
               <ul className="mt-4 max-h-48 overflow-y-auto">

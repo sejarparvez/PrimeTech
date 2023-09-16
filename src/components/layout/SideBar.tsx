@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
+import Options from "../common/post/Options";
 function Sidebar() {
   const [showMorePopup, setShowMorePopup] = useState(false);
 
@@ -11,39 +12,16 @@ function Sidebar() {
 
   return (
     <div className="flex w-48 md:w-40 lg:w-48 h-[86%] flex-col items-center  rounded-2xl border dark:border-bdr-200  py-3 px-4 transition-all duration-700 justify-between">
-      <div className="flex w-full max-w-xs flex-col gap-1.5 text-xl">
+      <div className="flex w-full max-w-xs flex-col gap-1.5 text-xl overflow-y-scroll">
         <div className="flex flex-col justify-between gap-2">
           <div className="text-2xl font-bold py-3 underline decoration-wavy">
             Categories
           </div>
-          <Link href={"/category/technology"}>
-            <span>Technology</span>
-          </Link>
-          <Link href={"/category/game"}>
-            <span>Game</span>
-          </Link>
-          <Link href={"/category/robotics"}>
-            <span>Robotics</span>
-          </Link>
-          <Link href={"/category/lifestyle"}>
-            <span>Lifestyle</span>
-          </Link>
-          <Link href={"/category/ai"}>
-            <span>AI</span>
-          </Link>
-          <Link href={"/category/bussiness"}>
-            <span>Business</span>
-          </Link>
-          <Link href={"/category/phone"}>
-            <span>Smart Phone</span>
-          </Link>
-          <Link href={"/category/computer"}>
-            <span>Computer</span>
-          </Link>
-          <Link href={"/category/laptop"}>
-            <span>Laptop</span>
-          </Link>
-          
+          {Options.map((category, index) => (
+            <Link href={`/category/${category.value}`} key={index}>
+              {category.label}
+            </Link>
+          ))}
         </div>
       </div>
 
