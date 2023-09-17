@@ -18,7 +18,11 @@ function Sidebar() {
             Categories
           </div>
           {Options.map((category, index) => (
-            <Link href={`/category/${category.value}`} key={index}>
+            <Link
+              href={`/category/${category.value}`}
+              key={index}
+              className=" text-base hover:text-[#007bff]"
+            >
               {category.label}
             </Link>
           ))}

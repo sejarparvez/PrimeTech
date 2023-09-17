@@ -2,6 +2,7 @@
 
 import AuthorCard from "@/components/card/AuthorCard";
 import Loading from "@/components/common/loading/Loading";
+import CategorySection from "@/components/core/CategorySection";
 import CommentForm from "@/components/core/Comment";
 import Sidebar from "@/components/layout/SideBar";
 import { useSession } from "next-auth/react";
@@ -168,82 +169,98 @@ export default function Post({ params }: PageProps) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@yourtwitterhandle" />
       </Head>
-      <div className="flex flex-col-reverse md:flex-row">
-        <div className="md:sticky z-20 top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
-          <Sidebar />
-        </div>
-        <div className="flex w-full relative">
-          <div className="flex flex-col md:gap-4 mx-1 md:mx-4">
-            <div className="rounded-2xl py-1">
-              <div className="mb-10 rounded-lg  py-4 px-2 md:px-4">
-                <h1 className="mb-4 text-3xl md:text-4xl text-primary-200 dark:text-lightgray-100 font-extrabold">
-                  {post.title}
-                </h1>
-                <div className="flex flex-col gap-4 md:flex-row md:justify-between">
-                  <div>
-                    <span className="flex text-sm">
-                      <span className="text-sm ">
-                        This Post Last Was Updated By{" "}
-                        <Link href={`/users/${post.author.id}`}>
-                          <span className="px-1 text-lg font-medium ">
-                            {post.author.name}
-                          </span>{" "}
-                        </Link>
-                        At{" "}
-                        <span className=" font-medium">
-                          {formatDate(post.updatedAt)}
+      <div>
+        <div className="flex flex-col-reverse lg:flex-row">
+          <div className="hidden lg:block lg:sticky z-20 top-14 lg:left-3 lg:h-screen mt-6 mx-auto lg:mt-0">
+            <Sidebar />
+          </div>
+          <div className="flex w-full relative">
+            <div className="flex flex-col lg:gap-4 mx-1 lg:mx-4">
+              <div className="rounded-2xl py-1">
+                <div className="mb-10 rounded-lg  py-4 px-2 md:px-4">
+                  <h1 className="mb-4 text-3xl md:text-4xl text-primary-200 dark:text-lightgray-100 font-extrabold">
+                    {post.title}
+                  </h1>
+                  <div className="flex flex-col gap-4 md:flex-row md:justify-between">
+                    <div>
+                      <span className="flex text-sm">
+                        <span className="text-sm ">
+                          This Post Last Was Updated By{" "}
+                          <Link href={`/users/${post.author.id}`}>
+                            <span className="px-1 text-lg font-medium ">
+                              {post.author.name}
+                            </span>{" "}
+                          </Link>
+                          At{" "}
+                          <span className=" font-medium">
+                            {formatDate(post.updatedAt)}
+                          </span>
                         </span>
                       </span>
-                    </span>
+                    </div>
+                    <div>
+                      <Link href={`/category/${post.category}`}>
+                        {" "}
+                        <button className="mr-10 rounded-tl-2xl rounded-br-2xl bg-primary-200 px-4 py-1 font-bold text-white dark:text-primary-200 dark:bg-primary-100">
+                          {post.category}
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                  <div>
-                    <Link href={`/category/${post.category}`}>
-                      {" "}
-                      <button className="mr-10 rounded-tl-2xl rounded-br-2xl bg-primary-200 px-4 py-1 font-bold text-white dark:text-primary-200 dark:bg-primary-100">
-                        {post.category}
-                      </button>
-                    </Link>
+                  <div className="mt-6 flex flex-col items-center gap-6 md:flex-row">
+                    {userInfo === post.author.email && (
+                      <div className="mx-auto flex items-center justify-center md:justify-end">
+                        <div>
+                          <Link
+                            className="mr-4 flex gap-1 rounded-lg bg-black px-3 py-2 font-bold text-white hover:bg-primary-200 dark:border"
+                            href={`/editpost/${params.category}/${params.slug}`}
+                          >
+                            Edit Post
+                          </Link>
+                        </div>
+                        <div>
+                          <button
+                            className=" flex gap-1 rounded-lg bg-red-600 px-3 py-2 font-bold text-white hover:bg-red-700"
+                            onClick={handleDelete}
+                          >
+                            Delete Post
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div className="mt-6 flex flex-col items-center gap-6 md:flex-row">
-                  {userInfo === post.author.email && (
-                    <div className="mx-auto flex items-center justify-center md:justify-end">
-                      <div>
-                        <Link
-                          className="mr-4 flex gap-1 rounded-lg bg-black px-3 py-2 font-bold text-white hover:bg-primary-200 dark:border"
-                          href={`/editpost/${params.category}/${params.slug}`}
-                        >
-                          Edit Post
-                        </Link>
-                      </div>
-                      <div>
-                        <button
-                          className=" flex gap-1 rounded-lg bg-red-600 px-3 py-2 font-bold text-white hover:bg-red-700"
-                          onClick={handleDelete}
-                        >
-                          Delete Post
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                <Image
+                  className="mx-auto rounded-lg w-full object-cover h-60 md:h-96"
+                  src={`${post.coverImage}`}
+                  alt=""
+                  width={1000}
+                  height={1000}
+                />
+                <div
+                  className={`mt-10 mb-12 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
+              <div className="my-20">
+                <CommentForm postId={post.id} />
+              </div>
+              <div className="w-full lg:hidden -right-10 rounded-lg  md:top-14 md:h-[86%] border dark:border-bdr-200">
+                <div className="flex flex-col justify-between h-[70%]">
+                  <div className=" h-[76%] rounded-2xl ">
+                    <AuthorCard
+                      id={post.author.id}
+                      name={post.author.name}
+                      image={post.author.image}
+                    />
+                  </div>
+                  <div className=" rounded-xl  h-80 flex items-center justify-center">
+                    Advertise
+                  </div>
                 </div>
               </div>
-              <Image
-                className="mx-auto rounded-lg w-full object-cover h-60 md:h-96"
-                src={`${post.coverImage}`}
-                alt=""
-                width={1000}
-                height={1000}
-              />
-              <div
-                className={`mt-10 mb-12 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
             </div>
-            <div className="my-20">
-              <CommentForm postId={post.id} />
-            </div>
-            <div className="w-full lg:hidden  -right-10 rounded-lg  md:top-14 md:h-[86%] border dark:border-bdr-200">
+            <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
               <div className="flex flex-col justify-between h-[70%]">
                 <div className=" h-[76%] rounded-2xl ">
                   <AuthorCard
@@ -258,20 +275,9 @@ export default function Post({ params }: PageProps) {
               </div>
             </div>
           </div>
-          <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
-            <div className="flex flex-col justify-between h-[70%]">
-              <div className=" h-[76%] rounded-2xl ">
-                <AuthorCard
-                  id={post.author.id}
-                  name={post.author.name}
-                  image={post.author.image}
-                />
-              </div>
-              <div className=" rounded-xl  h-80 flex items-center justify-center">
-                Advertise
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="lg:hidden">
+          <CategorySection />
         </div>
       </div>
     </>

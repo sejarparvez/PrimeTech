@@ -1,5 +1,4 @@
 "use client";
-import Notification from "@/components/notification/Notification";
 import Scrollspy from "react-scrollspy";
 
 import { Link as ScrollLink } from "react-scroll";
@@ -128,7 +127,6 @@ export default function Documentation() {
             ipsam amet corrupti ut repellat optio ab ad, pariatur aperiam! Illo.
           </p>
         </div>
-        <Notification />
       </div>
     </div>
   );

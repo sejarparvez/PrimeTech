@@ -1,6 +1,8 @@
 "use client";
 import Loading from "@/components/common/loading/Loading";
+import CategorySection from "@/components/core/CategorySection";
 import RecentPostModel from "@/components/core/RecentPostModel";
+import Sidebar from "@/components/layout/SideBar";
 import { useEffect, useState } from "react";
 
 type Post = {
@@ -46,8 +48,13 @@ export default function Post({ params }: { params: { category: string } }) {
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   return (
-    <div className="flex flex-col md:gap-10 mt-10">
-      <div className="flex flex-col gap-10">
+    <div className="flex flex-col justify-center md:flex-row md:gap-10 mt-10">
+      {isLoading ? null : (
+        <div className="hidden md:block md:sticky z-20 top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
+          <Sidebar />
+        </div>
+      )}
+      <div className="flex flex-col gap-10 relative">
         <div>
           <div className=" flex md:mt-10">
             <span className="mx-auto uppercase px-3 text-center text-2xl font-bold md:px-6 md:text-4xl ">
@@ -125,6 +132,9 @@ export default function Post({ params }: { params: { category: string } }) {
             </button>
           </div>
         )}
+      </div>
+      <div className="md:hidden mt-20">
+        <CategorySection />
       </div>
     </div>
   );
