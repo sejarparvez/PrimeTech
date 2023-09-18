@@ -1,7 +1,7 @@
-// CommentsList.js
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { BsHandThumbsDown, BsHandThumbsUp } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../common/loading/Loading";
@@ -14,6 +14,7 @@ interface Comment {
     image: string | null;
   };
   createdAt: string;
+  likes: number;
   content: string;
 }
 
@@ -25,15 +26,13 @@ interface CommentsListProps {
 function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
-  // Define the admin email address
   const adminEmail = process.env.NEXT_PUBLIC_ADMIN;
 
   const fetchComments = useCallback(() => {
     setIsLoading(true);
 
-    // Make an API request to fetch comments
     fetch(`/api/comment?${postId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -52,7 +51,6 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
 
   const handleDelete = async (commentId: string) => {
     try {
-      // Make an API request to delete the comment
       toast.loading("Please wait while we delete your comment.");
       const response = await fetch(`/api/comment?id=${commentId}`, {
         method: "DELETE",
@@ -62,23 +60,40 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
       });
 
       if (response.status === 204) {
-        // Comment deleted successfully, update the comments list
         toast.dismiss();
         const updatedComments = comments.filter(
           (comment) => comment.id !== commentId
         );
         setComments(updatedComments);
       } else {
-        // Handle error response
         toast.dismiss();
         toast.error("There was an error deleting your comment.");
-        console.error("Error deleting comment:", response.statusText);
-        // You can show an error message to the user
       }
     } catch (error) {
-      console.error("Error deleting comment:", error);
-      // You can show an error message to the user
+      toast.error("There was an error deleting your comment.");
     }
+  };
+
+  const handleLike = (commentId: string) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        return { ...comment, likes: comment.likes + 1 };
+      }
+      return comment;
+    });
+
+    setComments(updatedComments);
+  };
+
+  const handleUnlike = (commentId: string) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId && comment.likes > 0) {
+        return { ...comment, likes: comment.likes - 1 };
+      }
+      return comment;
+    });
+
+    setComments(updatedComments);
   };
 
   return (
@@ -116,6 +131,23 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
                   })}
                 </div>
               </div>
+            </div>
+            <div className="md:ml-16">{comment.content}</div>
+            <div className="md:pl-16 flex items-center justify-between mt-3">
+              <div className="flex gap-8">
+                <div>
+                  <span>{comment.likes}</span>
+                  <button onClick={() => handleLike(comment.id)}>
+                    <BsHandThumbsUp size={20} />
+                  </button>
+                </div>
+                <div>
+                  <span>{comment.likes}</span>
+                  <button onClick={() => handleUnlike(comment.id)}>
+                    <BsHandThumbsDown size={20} />
+                  </button>
+                </div>
+              </div>
               {(session?.user?.email === adminEmail ||
                 session?.user?.name === comment.author.name) && (
                 <button
@@ -126,7 +158,6 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
                 </button>
               )}
             </div>
-            <div className="md:ml-16">{comment.content}</div>
           </div>
         ))
       )}
