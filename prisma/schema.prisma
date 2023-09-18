@@ -45,6 +45,7 @@ model User {
   sessions      Session[]
   posts         Post[]
   comments      Comment[]
+  Like          Like[]
 }
 
 model Post {
@@ -65,12 +66,22 @@ model Post {
 model Comment {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
+  likeCount Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   authorId  String   @db.ObjectId
   postId    String   @db.ObjectId
   author    User     @relation(fields: [authorId], references: [id])
   post      Post     @relation(fields: [postId], references: [id])
+  likes     Like[]
+}
+
+model Like {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String  @db.ObjectId
+  commentId String  @db.ObjectId
+  user      User    @relation(fields: [userId], references: [id])
+  comment   Comment @relation(fields: [commentId], references: [id])
 }
 
 model Notification {

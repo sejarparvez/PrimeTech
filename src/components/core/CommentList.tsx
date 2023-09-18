@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { BsHandThumbsDown, BsHandThumbsUp } from "react-icons/bs";
+import { LiaHeart, LiaHeartSolid } from "react-icons/lia";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../common/loading/Loading";
@@ -14,7 +14,8 @@ interface Comment {
     image: string | null;
   };
   createdAt: string;
-  likes: number;
+  likeCount: number;
+  hasLiked: boolean;
   content: string;
 }
 
@@ -27,6 +28,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
+  const user = session?.user?.email;
 
   const adminEmail = process.env.NEXT_PUBLIC_ADMIN;
 
@@ -74,27 +76,26 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
     }
   };
 
-  const handleLike = (commentId: string) => {
-    const updatedComments = comments.map((comment) => {
-      if (comment.id === commentId) {
-        return { ...comment, likes: comment.likes + 1 };
-      }
-      return comment;
+  // Function to handle liking/unliking a comment
+  function handleIncrement(commentId: string) {
+    setComments((prevComments) => {
+      return prevComments.map((comment) => {
+        if (comment.id === commentId) {
+          // Toggle like state and adjust likeCount
+          const updatedComment = { ...comment };
+          if (user && !updatedComment.hasLiked) {
+            updatedComment.likeCount = updatedComment.likeCount + 1;
+            updatedComment.hasLiked = true;
+          } else if (user && updatedComment.hasLiked) {
+            updatedComment.likeCount = updatedComment.likeCount - 1;
+            updatedComment.hasLiked = false;
+          }
+          return updatedComment;
+        }
+        return comment;
+      });
     });
-
-    setComments(updatedComments);
-  };
-
-  const handleUnlike = (commentId: string) => {
-    const updatedComments = comments.map((comment) => {
-      if (comment.id === commentId && comment.likes > 0) {
-        return { ...comment, likes: comment.likes - 1 };
-      }
-      return comment;
-    });
-
-    setComments(updatedComments);
-  };
+  }
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -134,18 +135,14 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
             </div>
             <div className="md:ml-16">{comment.content}</div>
             <div className="md:pl-16 flex items-center justify-between mt-3">
-              <div className="flex gap-8">
-                <div>
-                  <span>{comment.likes}</span>
-                  <button onClick={() => handleLike(comment.id)}>
-                    <BsHandThumbsUp size={20} />
-                  </button>
-                </div>
-                <div>
-                  <span>{comment.likes}</span>
-                  <button onClick={() => handleUnlike(comment.id)}>
-                    <BsHandThumbsDown size={20} />
-                  </button>
+              <div className="flex gap-2">
+                {comment.likeCount > 0 && comment.likeCount}
+                <div onClick={() => handleIncrement(comment.id)}>
+                  {comment.hasLiked ? (
+                    <LiaHeartSolid size={24} />
+                  ) : (
+                    <LiaHeart size={24} />
+                  )}
                 </div>
               </div>
               {(session?.user?.email === adminEmail ||
