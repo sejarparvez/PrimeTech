@@ -16,7 +16,7 @@ interface Comment {
     image: string | null;
   };
   createdAt: string;
-  likedBy: [];
+  likedBy: string[];
   content: string;
 }
 
@@ -29,7 +29,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
-  const user = session?.user?.id;
+  const user = session?.user?.id as string | undefined;
 
   const adminEmail = process.env.NEXT_PUBLIC_ADMIN;
 
@@ -78,34 +78,43 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   };
 
   // Function to handle liking/disliking a comment
-  async function handleIncrement(commentId: string) {
-    try {
-      toast.loading("Please wait while we update your like status.");
+  async function handleIncrement(commentId: string, comment: Comment) {
+    if (user) {
+      try {
+        toast.loading("Please wait while we update your like status.");
 
-      // Construct the URL and parameters properly using URLSearchParams
-      const params = new URLSearchParams();
-      params.append("commentId", commentId);
-      if (user) {
-        params.append("userId", user);
-      }
-      params.append("like", "true"); // Assuming you're liking the comment
+        // Construct the URL and parameters properly using URLSearchParams
+        const params = new URLSearchParams();
+        params.append("commentId", commentId);
+        if (user) {
+          params.append("userId", user ?? "");
+        }
 
-      // Send a PUT request to your API to update the like status
-      const response = await fetch(`/api/comment?${params.toString()}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.status === 200) {
-        toast.dismiss();
-        toast.success("Updated like status");
-      } else {
-        toast.dismiss();
+        if (!comment.likedBy.includes(user)) {
+          params.append("like", "true");
+        } else {
+          params.append("like", "false");
+        }
+
+        // Send a PUT request to your API to update the like status
+        const response = await fetch(`/api/comment?${params.toString()}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          toast.dismiss();
+          toast.success("Updated like status");
+        } else {
+          toast.dismiss();
+          toast.error("There was an error updating your like status.");
+        }
+      } catch (error) {
         toast.error("There was an error updating your like status.");
       }
-    } catch (error) {
-      toast.error("There was an error updating your like status.");
+    } else {
+      toast.error("You must be logged in to like or dislike comments.");
     }
   }
 
@@ -149,8 +158,8 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
             <div className="md:pl-16 flex items-center justify-between mt-3">
               <div className="flex gap-2">
                 {comment.likedBy.length > 0 && comment.likedBy.length}
-                <div onClick={() => handleIncrement(comment.id)}>
-                  {comment.hasLiked ? (
+                <div onClick={() => handleIncrement(comment.id, comment)}>
+                  {user && comment.likedBy.includes(user) ? (
                     <LiaHeartSolid size={24} />
                   ) : (
                     <LiaHeart size={24} />
