@@ -28,7 +28,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
-  const user = session?.user?.email;
+  const user = session?.user?.id;
 
   const adminEmail = process.env.NEXT_PUBLIC_ADMIN;
 
@@ -76,7 +76,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
     }
   };
 
-  // Function to handle liking/unliking a comment
+  // Function to handle liking/disliking a comment
   function handleIncrement(commentId: string) {
     setComments((prevComments) => {
       return prevComments.map((comment) => {
@@ -86,6 +86,9 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
           if (user && !updatedComment.hasLiked) {
             updatedComment.likeCount = updatedComment.likeCount + 1;
             updatedComment.hasLiked = true;
+            console.log(user);
+          } else if (!user) {
+            toast.error("Log in to like this comment");
           } else if (user && updatedComment.hasLiked) {
             updatedComment.likeCount = updatedComment.likeCount - 1;
             updatedComment.hasLiked = false;
