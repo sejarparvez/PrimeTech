@@ -120,3 +120,44 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
     return new NextResponse("An error occurred", { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest, res: NextResponse) {
+  const url = new URL(req.url);
+
+  try {
+    const queryParams = new URLSearchParams(url.search);
+    const commentId = queryParams.get("commentId");
+    const userId = queryParams.get("userId");
+    const like = queryParams.get("like");
+    if (commentId && userId) {
+      const comment = await prisma.comment.findUnique({
+        where: { id: commentId },
+      });
+      if (comment) {
+        if (like === "true") {
+          comment.likedBy.push(userId);
+        } else if (like === "false") {
+          // Update the likedBy array by filtering out the userId
+          comment.likedBy = comment.likedBy.filter((id) => id !== userId);
+        }
+
+        // Save the updated comment
+        const updatedComment = await prisma.comment.update({
+          where: { id: commentId },
+          data: {
+            likedBy: comment.likedBy,
+          },
+        });
+
+        return new NextResponse(JSON.stringify(updatedComment));
+      } else {
+        return new NextResponse("Comment not found", { status: 404 });
+      }
+    } else {
+      return new NextResponse("Invalid parameters", { status: 400 });
+    }
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    return new NextResponse("An error occurred", { status: 500 });
+  }
+}

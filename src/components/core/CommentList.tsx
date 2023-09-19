@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Loading from "../common/loading/Loading";
 
 interface Comment {
+  hasLiked: any;
+  likeCount: number;
   id: string;
   author: {
     name: string;
@@ -14,8 +16,7 @@ interface Comment {
     image: string | null;
   };
   createdAt: string;
-  likeCount: number;
-  hasLiked: boolean;
+  likedBy: [];
   content: string;
 }
 
@@ -77,27 +78,35 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
   };
 
   // Function to handle liking/disliking a comment
-  function handleIncrement(commentId: string) {
-    setComments((prevComments) => {
-      return prevComments.map((comment) => {
-        if (comment.id === commentId) {
-          // Toggle like state and adjust likeCount
-          const updatedComment = { ...comment };
-          if (user && !updatedComment.hasLiked) {
-            updatedComment.likeCount = updatedComment.likeCount + 1;
-            updatedComment.hasLiked = true;
-            console.log(user);
-          } else if (!user) {
-            toast.error("Log in to like this comment");
-          } else if (user && updatedComment.hasLiked) {
-            updatedComment.likeCount = updatedComment.likeCount - 1;
-            updatedComment.hasLiked = false;
-          }
-          return updatedComment;
-        }
-        return comment;
+  async function handleIncrement(commentId: string) {
+    try {
+      toast.loading("Please wait while we update your like status.");
+
+      // Construct the URL and parameters properly using URLSearchParams
+      const params = new URLSearchParams();
+      params.append("commentId", commentId);
+      if (user) {
+        params.append("userId", user);
+      }
+      params.append("like", "true"); // Assuming you're liking the comment
+
+      // Send a PUT request to your API to update the like status
+      const response = await fetch(`/api/comment?${params.toString()}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-    });
+      if (response.status === 200) {
+        toast.dismiss();
+        toast.success("Updated like status");
+      } else {
+        toast.dismiss();
+        toast.error("There was an error updating your like status.");
+      }
+    } catch (error) {
+      toast.error("There was an error updating your like status.");
+    }
   }
 
   return (
@@ -139,7 +148,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
             <div className="md:ml-16">{comment.content}</div>
             <div className="md:pl-16 flex items-center justify-between mt-3">
               <div className="flex gap-2">
-                {comment.likeCount > 0 && comment.likeCount}
+                {comment.likedBy.length > 0 && comment.likedBy.length}
                 <div onClick={() => handleIncrement(comment.id)}>
                   {comment.hasLiked ? (
                     <LiaHeartSolid size={24} />
