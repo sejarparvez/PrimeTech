@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -56,11 +57,17 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    session: ({ session, token }: { session: Session; token: string }) => ({
+    session: ({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: string | JWT;
+    }) => ({
       ...session,
       user: {
         ...session.user,
-        id: token.sub,
+        id: typeof token === "string" ? token : token.sub,
       },
     }),
   },
