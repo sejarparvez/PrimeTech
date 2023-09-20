@@ -1,5 +1,6 @@
 import { FiClock, FiUser } from "react-icons/fi";
 
+import { Blur } from "@/image/Blur";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -50,6 +51,8 @@ function RecentPostModel({
                 className="h-full w-full object-cover rounded"
                 height={500}
                 width={500}
+                placeholder="blur"
+                blurDataURL={Blur}
               />
             </div>
             <div className="col-span-7 flex flex-col justify-between gap-4">

@@ -103,7 +103,22 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
             "Content-Type": "application/json",
           },
         });
+
         if (response.status === 200) {
+          const responseData = await response.json(); // Parse the response data
+          const updatedComments = comments.map((c) => {
+            if (c.id === comment.id) {
+              // Update the likedBy array and likeCount based on the response data
+              return {
+                ...c,
+                likedBy: responseData.likedBy,
+                likeCount: responseData.likeCount,
+              };
+            }
+            return c;
+          });
+
+          setComments(updatedComments);
           toast.dismiss();
           toast.success("Updated like status");
         } else {
@@ -114,7 +129,7 @@ function CommentsList({ postId, onCommentAdded }: CommentsListProps) {
         toast.error("There was an error updating your like status.");
       }
     } else {
-      toast.error("You must be logged in to like or dislike comments.");
+      toast.error("You must be logged in to like comments.");
     }
   }
 

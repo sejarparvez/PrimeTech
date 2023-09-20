@@ -1,3 +1,4 @@
+import { Blur } from "@/image/Blur";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -29,6 +30,8 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
           className="h-52 rounded-xl lg:rounded-3xl"
           height={500}
           width={500}
+          placeholder="blur"
+          blurDataURL={Blur}
         />
         <div className="flex flex-col gap-3 p-4">
           <div className="flex justify-between text-gray-700 dark:text-gray-300">

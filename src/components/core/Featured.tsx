@@ -1,4 +1,5 @@
 "use client";
+import { Blur } from "@/image/Blur";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -104,6 +105,8 @@ function Featured() {
             alt=""
             width={500}
             height={500}
+            placeholder="blur"
+            blurDataURL={Blur}
           />
         </div>
         <div className="relative flex flex-1 flex-col gap-5 lg:order-1">

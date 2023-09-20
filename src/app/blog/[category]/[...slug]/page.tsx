@@ -5,6 +5,7 @@ import Loading from "@/components/common/loading/Loading";
 import CategorySection from "@/components/core/CategorySection";
 import CommentForm from "@/components/core/Comment";
 import Sidebar from "@/components/layout/SideBar";
+import { Blur } from "@/image/Blur";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -236,6 +237,8 @@ export default function Post({ params }: PageProps) {
                   alt=""
                   width={1000}
                   height={1000}
+                  placeholder="blur"
+                  blurDataURL={Blur}
                 />
                 <div
                   className={`mt-10 mb-12 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
