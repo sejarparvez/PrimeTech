@@ -1,5 +1,7 @@
 const Options = [
-  "Technology",
+  "Technology News",
+  "HotPost",
+  "Featured",
   "Programming",
   "Web Development",
   "Mobile Apps",
@@ -9,21 +11,25 @@ const Options = [
   "Blockchain",
   "Cybersecurity",
   "Cloud Computing",
-  "IoT (Internet of Things)",
+  "Internet of Things",
   "Tech Reviews",
   "Software Development",
-  "Game Development",
   "Virtual Reality",
-  "Augmented Reality",
   "Robotics",
   "Hardware",
   "Networking",
   "Databases",
   "Operating Systems",
-  "Mobile Devices",
-  "Computer Science",
-]
-  .map((option) => ({ value: option.toLowerCase(), label: option }))
-  .sort((a, b) => a.label.localeCompare(b.label));
+  "DevOps",
+  "Linux",
+];
 
-export default Options;
+const optionsWithLinks = Options.map((option) => ({
+  value: option.toLowerCase().replace(/\s+/g, "_"),
+  label: option,
+}));
+
+// Sort the array alphabetically by the 'label' property
+optionsWithLinks.sort((a, b) => a.label.localeCompare(b.label));
+
+export default optionsWithLinks;

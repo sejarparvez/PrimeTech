@@ -61,7 +61,7 @@ function CommentForm({ postId }: CommentFormProps) {
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden ">
-      <div className="flex flex-col gap-4 rounded-lg bg-slate-100 p-4 dark:bg-black">
+      <div className="flex flex-col gap-4  rounded-lg border dark:border-darkgray-200 p-4">
         <span className="text-2xl font-semibold">Leave A Reply</span>
         {name ? (
           <div className="flex flex-col gap-6">

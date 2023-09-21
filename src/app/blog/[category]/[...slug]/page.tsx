@@ -144,6 +144,21 @@ export default function Post({ params }: PageProps) {
     return html.replace(/(<([^>]+)>)/gi, "");
   }
 
+  function formatString(inputString: string) {
+    // Split the inputString by underscores
+    const words = inputString.split("_");
+
+    // Capitalize the first letter of each word and join them with a space
+    const formattedString = words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    return formattedString;
+  }
+
+  const inputString = post.category;
+  const formattedCategory = formatString(inputString);
+
   const cleanedContent = stripHtmlTags(post.content);
 
   const userInfo = session?.user?.email;
@@ -203,7 +218,7 @@ export default function Post({ params }: PageProps) {
                       <Link href={`/category/${post.category}`}>
                         {" "}
                         <button className="mr-10 rounded-tl-2xl rounded-br-2xl bg-primary-200 px-4 py-1 font-bold text-white dark:text-primary-200 dark:bg-primary-100">
-                          {post.category}
+                          {formattedCategory}
                         </button>
                       </Link>
                     </div>

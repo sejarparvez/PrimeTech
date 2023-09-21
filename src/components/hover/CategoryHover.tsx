@@ -48,7 +48,7 @@ export default function CategoryHover() {
 
       {showCategories && (
         <div
-          className="absolute  w-80 -left-10 mt-1 p-2 bg-white dark:bg-gray-800  border border-gray-300 rounded shadow-md"
+          className="absolute  w-96 -left-20 mt-1 p-2 bg-white dark:bg-gray-800  border border-gray-300 rounded shadow-md"
           onMouseEnter={handleDropdownMouseEnter}
           onMouseLeave={handleDropdownMouseLeave}
         >

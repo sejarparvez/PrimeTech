@@ -47,6 +47,21 @@ export default function Post({ params }: { params: { category: string } }) {
   // Calculate total pages based on the total number of posts and posts per page
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
+  function formatString(inputString: string) {
+    // Split the inputString by underscores
+    const words = inputString.split("_");
+
+    // Capitalize the first letter of each word and join them with a space
+    const formattedString = words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    return formattedString;
+  }
+
+  const inputString = params.category;
+  const formattedCategory = formatString(inputString);
+
   return (
     <div className="flex flex-col justify-center md:flex-row md:gap-10 mt-10">
       {isLoading ? null : (
@@ -57,8 +72,8 @@ export default function Post({ params }: { params: { category: string } }) {
       <div className="flex flex-col gap-10 relative">
         <div>
           <div className=" flex md:mt-10">
-            <span className="mx-auto uppercase px-3 text-center text-2xl font-bold md:px-6 md:text-4xl ">
-              {params.category}
+            <span className="mx-auto  px-3 text-center text-2xl font-bold md:px-6 md:text-4xl ">
+              {formattedCategory}
             </span>
           </div>
           <div className="flex items-center justify-center gap-16 flex-col mt-20 mx-1 md:mx-4">
