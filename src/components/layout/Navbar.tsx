@@ -9,6 +9,7 @@ import { TbBrandAzure } from "react-icons/tb";
 import Btn from "../common/button/Btn";
 import CategoryHover from "../hover/CategoryHover";
 import Trending from "../hover/Trending";
+import ProfileMenu from "../profile/ProfileMenu";
 import Menu from "./Menu";
 import SearchBar from "./SearchBar";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -16,6 +17,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 export default function Navbar() {
   const { data: session } = useSession();
   const email = session?.user?.email;
+  const image = session?.user?.image;
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -84,8 +86,8 @@ export default function Navbar() {
           <ThemeSwitcher />
         </ThemeProvider>
         <div className="hidden md:block">
-          {email ? (
-            <Btn text="Dashboard" link={`/dashboard`} />
+          {email && image ? (
+            <ProfileMenu />
           ) : (
             <Btn text="Log in" link="/signin" />
           )}

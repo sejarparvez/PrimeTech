@@ -88,7 +88,7 @@ export default function Dashboard() {
                   alt=""
                   height={500}
                   width={500}
-                  className=" object-cover h-60 w-80"
+                  className=" object-cover h-60"
                 />
               ) : (
                 "No image found"
