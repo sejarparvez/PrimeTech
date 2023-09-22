@@ -1,14 +1,17 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { TbBrandAzure } from "react-icons/tb";
 import Btn from "../common/button/Btn";
+import { useRouter } from "next/navigation";
+import { FaPowerOff } from "react-icons/fa";
 
 export default function ProfileMenu() {
   const { data: session } = useSession();
+  const router = useRouter();
   const email = session?.user?.email;
   const image = session?.user?.image;
 
@@ -16,6 +19,14 @@ export default function ProfileMenu() {
 
   const HandleClick = () => {
     setNavOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+      signOut();
+      router.push("/");
+    }
   };
   return (
     <>
@@ -44,9 +55,22 @@ export default function ProfileMenu() {
               <AiOutlineClose size={24} onClick={HandleClick} />
             </div>
             <hr />
-            <div className="my-4 flex flex-col gap-4 px-8 [&>*]:hover:underline [&>*]:hover:font-semibold">
-              <Link href={"/categories"} onClick={HandleClick}>
-                Categories
+            <div className="my-4 flex flex-col gap-4 px-8">
+              <Link
+                href={"/dashboard"}
+                onClick={HandleClick}
+                className="flex gap-3 items-center"
+              >
+                {image && (
+                  <Image
+                    src={image}
+                    alt=""
+                    height={100}
+                    width={100}
+                    className="h-8 w-8 rounded-full"
+                  />
+                )}
+                {session?.user?.name && <span>{session.user?.name}</span>}
               </Link>
               <Link href={"/category/hotpost"} onClick={HandleClick}>
                 Trending
@@ -57,11 +81,15 @@ export default function ProfileMenu() {
             </div>
             <hr />
             <div className="px-8 py-6" onClick={HandleClick}>
-              {email ? (
-                <Btn text="Dashboard" link="/dashboard" />
-              ) : (
-                <Btn text="Log in" link="/signin" />
-              )}
+              <div className="flex items-center justify-center">
+                <button
+                  onClick={handleLogout}
+                  className="font-bold flex gap-4 items-center justify-center px-10 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500"
+                >
+                  Log Out
+                  <FaPowerOff size={14} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
