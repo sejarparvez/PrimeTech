@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { TbBrandAzure } from "react-icons/tb";
-import Btn from "../common/button/Btn";
 import { useRouter } from "next/navigation";
 import { FaPowerOff } from "react-icons/fa";
+import Profile from "@/image/profile.png";
 
 export default function ProfileMenu() {
   const { data: session } = useSession();
@@ -31,7 +31,7 @@ export default function ProfileMenu() {
   return (
     <>
       <div className=" relative">
-        {email && image && (
+        {email && image ? (
           <Image
             src={image}
             alt=""
@@ -39,7 +39,16 @@ export default function ProfileMenu() {
             width={100}
             className="h-8 w-8 rounded-full object-cover"
             onClick={HandleClick}
-          ></Image>
+          />
+        ) : (
+          <Image
+            src={Profile}
+            alt=""
+            height={100}
+            width={100}
+            className="h-8 w-8 rounded-full object-cover"
+            onClick={HandleClick}
+          />
         )}
 
         <div
@@ -59,7 +68,7 @@ export default function ProfileMenu() {
               <Link
                 href={"/dashboard"}
                 onClick={HandleClick}
-                className="flex gap-3 items-center"
+                className="flex gap-3 items-end text-base mb-2"
               >
                 {image && (
                   <Image
@@ -70,13 +79,15 @@ export default function ProfileMenu() {
                     className="h-8 w-8 rounded-full"
                   />
                 )}
-                {session?.user?.name && <span>{session.user?.name}</span>}
+                <span className="font-bold text-xl uppercase">
+                  {session?.user?.name && <span>{session.user?.name}</span>}
+                </span>
               </Link>
-              <Link href={"/category/hotpost"} onClick={HandleClick}>
-                Trending
+              <Link href={"/newpost"} onClick={HandleClick}>
+                New Post
               </Link>
-              <Link href={"/documentation"} onClick={HandleClick}>
-                Documentation
+              <Link href={"/editprofile"} onClick={HandleClick}>
+                Edit Profile
               </Link>
             </div>
             <hr />
