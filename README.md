@@ -20,19 +20,26 @@ Your overview of the blog website and its key features.
 ## Development Environment
 
 - **Operating System:** Linux/Windows/Mac
-- **Text Editor/IDE:** NeoVim/Vim/VsCode/Sublime/etc...
+- **Text Editor/IDE:** NeoVim/Vim/VsCodium/Sublime/etc...
 - **Package Manager:** npm/yarn
 
 ## Setup
 
 1. **Clone the repository:**
 
-git clone [repository_url]
-cd [repository_directory]
+```
+git clone https://github.com/sejarparvez/PrimeTech.git
+```
+
+```
+cd PrimeTech
+```
 
 2. **Install dependencies:**
 
+```
 npm install
+```
 
 3. **Configure Environment Variables:**
 
@@ -40,7 +47,9 @@ Explain which environment variables need to be set and how to obtain their value
 
 4. **Run the development server:**
 
+```
 npm run dev
+```
 
 ## Architecture
 
