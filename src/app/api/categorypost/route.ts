@@ -31,6 +31,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
       skip,
       take: limit,
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
 
     if (!userInfo) {
