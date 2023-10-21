@@ -18,12 +18,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
         createdAt: true,
         author: {
           select: {
-            name: true, // Include the author's name
+            name: true,
           },
         },
       },
       orderBy: {
-        updatedAt: "desc",
+        ceratedAt: "desc",
       },
     });
 
