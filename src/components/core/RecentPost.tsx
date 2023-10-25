@@ -47,7 +47,9 @@ function RecentPost() {
     <div className="flex flex-col items-center gap-16 my-10 m-1">
       {isLoading ? (
         <>
-          <Loading />
+          <div className="w-full">
+            <Loading />
+          </div>
         </>
       ) : (
         posts.map((post) => {
