@@ -16,6 +16,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         category: true,
         content: true,
         createdAt: true,
+        updatedAt: true,
         author: {
           select: {
             name: true,
@@ -23,7 +24,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         },
       },
       orderBy: {
-        ceratedAt: "desc",
+        updatedAt: "desc",
       },
     });
 

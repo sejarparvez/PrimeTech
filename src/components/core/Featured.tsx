@@ -16,7 +16,7 @@ function Featured() {
     author: {
       name: string;
     };
-    createdAt: string;
+    updatedAt: string;
     content: string;
   }
 
@@ -114,7 +114,7 @@ function Featured() {
             {post.title}
           </div>
           <div className="text-gray-500 dark:text-gray-400">
-            {post.author?.name} || {formatDate(post?.createdAt)}
+            {post.author?.name} || {formatDate(post?.updatedAt)}
           </div>
           <div className="text-dark-300 bottom-5 lg:bottom-0">{summary}...</div>
         </div>
