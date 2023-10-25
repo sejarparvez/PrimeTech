@@ -279,7 +279,7 @@ export default function Post({ params }: PageProps) {
               </div>
             </div>
             <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
-              <div className="flex flex-col justify-between h-[70%]">
+              <div className="flex flex-col justify-between w-[14rem] h-[70%]">
                 <div className=" h-[76%] rounded-2xl ">
                   <AuthorCard
                     id={post.author.id}
