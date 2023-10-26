@@ -7,10 +7,9 @@ import { FaTwitter } from "react-icons/fa";
 import { GrFacebook } from "react-icons/gr";
 import { TbBrandAzure } from "react-icons/tb";
 import Btn from "../common/button/Btn";
-import CategoryHover from "../hover/CategoryHover";
-import Trending from "../hover/Trending";
 import ProfileMenu from "../profile/ProfileMenu";
 import Menu from "./Menu";
+import { NavigationMenuDemo } from "./Navigation";
 import SearchBar from "./SearchBar";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
@@ -59,10 +58,7 @@ export default function Navbar() {
           </Link>
         </span>
         <span className="hidden xl:flex items-center space-x-4 [&>*]:cursor-pointer hover:[&>*]:text-primary-200 dark:hover:[&>*]:text-lightgray-100">
-          <CategoryHover />
-          <Trending />
-          <span>About Us</span>
-          <Link href={"/documentation"}>Documentation</Link>
+          <NavigationMenuDemo />
         </span>
       </nav>
 
