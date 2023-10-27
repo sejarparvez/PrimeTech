@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import Options from "../common/post/Options";
+import { Button } from "../ui/button";
 function Sidebar() {
   const [showMorePopup, setShowMorePopup] = useState(false);
 
@@ -14,9 +15,7 @@ function Sidebar() {
     <div className="flex w-48 md:w-40 lg:w-48 h-[86%] flex-col items-center  rounded-2xl border dark:border-bdr-200  py-3 px-4 transition-all duration-700 justify-between">
       <div className="flex w-full max-w-xs flex-col gap-1.5 text-xl overflow-y-scroll">
         <div className="flex flex-col justify-between gap-2">
-          <div className="text-2xl font-bold py-3 underline decoration-wavy">
-            Categories
-          </div>
+          <div className="text-2xl font-bold py-3">Categories</div>
           {Options.map((category, index) => (
             <Link
               href={`/category/${category.value}`}
@@ -29,12 +28,15 @@ function Sidebar() {
         </div>
       </div>
 
-      <span
-        className="flex cursor-pointer items-center gap-2 bg-primary-200  py-1.5 rounded-md text-primary-100 justify-center dark:border px-6 mt-6"
-        onClick={toggleMorePopup}
-      >
-        More <FaArrowRight />
-      </span>
+      <div>
+        <Button
+          size="lg"
+          className="flex gap-2 items-center mt-6"
+          onClick={toggleMorePopup}
+        >
+          More <FaArrowRight />
+        </Button>
+      </div>
 
       {/* Sliding Popup */}
       <div

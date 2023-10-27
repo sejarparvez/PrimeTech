@@ -1,10 +1,12 @@
 "use client";
 
 import AuthorCard from "@/components/card/AuthorCard";
+import { AlertDialogDemo } from "@/components/common/alert/Alert";
 import Loading from "@/components/common/loading/Loading";
 import CategorySection from "@/components/core/CategorySection";
 import CommentForm from "@/components/core/Comment";
 import Sidebar from "@/components/layout/SideBar";
+import { Button } from "@/components/ui/button";
 import { Blur } from "@/image/Blur";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
@@ -81,35 +83,6 @@ export default function Post({ params }: PageProps) {
   if (!post) {
     return <div>Post not found</div>;
   }
-
-  const handleDelete = async (): Promise<void> => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-
-    if (confirmed) {
-      setIsDeleting(true);
-
-      try {
-        const response = await fetch(
-          `/api/${post.category}/${params.slug}?${post.id}`,
-          {
-            method: "DELETE",
-          }
-        );
-
-        if (response.ok) {
-          router.push("/");
-        } else {
-          console.error("Error deleting post");
-        }
-      } catch (error) {
-        console.error("Error deleting post:", error);
-      } finally {
-        setIsDeleting(false);
-      }
-    }
-  };
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -225,22 +198,19 @@ export default function Post({ params }: PageProps) {
                   </div>
                   <div className="mt-6 flex flex-col items-center gap-6 md:flex-row">
                     {userInfo === post.author.email && (
-                      <div className="mx-auto flex items-center justify-center md:justify-end">
+                      <div className="mx-auto flex items-center justify-center md:justify-end gap-4">
                         <div>
                           <Link
-                            className="mr-4 flex gap-1 rounded-lg bg-black px-3 py-2 font-bold text-white hover:bg-primary-200 dark:border"
                             href={`/editpost/${params.category}/${params.slug}`}
                           >
-                            Edit Post
+                            <Button size="lg">Edit Post</Button>
                           </Link>
                         </div>
                         <div>
-                          <button
-                            className=" flex gap-1 rounded-lg bg-red-600 px-3 py-2 font-bold text-white hover:bg-red-700"
-                            onClick={handleDelete}
-                          >
-                            Delete Post
-                          </button>
+                          <AlertDialogDemo
+                            link={`/api/${post.category}/${params.slug}?${post.id}`}
+                            onDelete={() => router.push("/")}
+                          />
                         </div>
                       </div>
                     )}

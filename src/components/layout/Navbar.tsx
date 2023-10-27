@@ -5,9 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaTwitter } from "react-icons/fa";
 import { GrFacebook } from "react-icons/gr";
-import { TbBrandAzure } from "react-icons/tb";
-import Btn from "../common/button/Btn";
 import ProfileMenu from "../profile/ProfileMenu";
+import { Button } from "../ui/button";
 import Menu from "./Menu";
 import { NavigationMenuDemo } from "./Navigation";
 import SearchBar from "./SearchBar";
@@ -41,7 +40,7 @@ export default function Navbar() {
     <header
       className={`z-50 flex h-14 w-full justify-between ${
         visible ? "opacity-100 backdrop-blur-md" : "opacity-0"
-      } transition-transform duration-500 ease-in-out bg-white dark:bg-primary-200 bg-opacity-80 dark:bg-opacity-80 items-center border-b border-bdr-100 dark:border-bdr-200 lg:px-7 px-2 fixed top-0 left-0`}
+      } transition-transform duration-500 ease-in-out bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 items-center border-b border-bdr-100 dark:border-bdr-200 lg:px-7 px-2 fixed top-0 left-0`}
     >
       <nav className=" text-sm font-medium flex space-x-4 [&>*]:p-2  items-center ">
         <span>
@@ -49,10 +48,7 @@ export default function Navbar() {
             href={"/"}
             className="flex text-primary-200 items-center space-x-2 text-lg md:text-lg"
           >
-            <span className="text-primary-200 dark:text-primary-100">
-              <TbBrandAzure size={20} />
-            </span>
-            <span className="text-primary-200 dark:text-lightgray-100">
+            <span className=" text-black text-2xl font-extrabold dark:text-lightgray-100">
               PrimeTech
             </span>
           </Link>
@@ -64,19 +60,15 @@ export default function Navbar() {
 
       <div className="flex space-x-3 md:space-x-6 items-center">
         <SearchBar />
-        <Link
-          target="_blank"
-          href={"https://facebook.com/sejarparvez"}
-          className="text-darkgray-200 dark:text-darkgray-100 md:flex items-center rounded justify-center p-2 hover:bg-lightgray-100 dark:hover:bg-lightgray-200 hidden"
-        >
-          <GrFacebook />
+        <Link target="_blank" href={"https://facebook.com/sejarparvez"}>
+          <Button variant="ghost" size="icon">
+            <GrFacebook />
+          </Button>
         </Link>
-        <Link
-          target="_blank"
-          href={"https://twitter.com/sejarparvez"}
-          className="text-darkgray-200 dark:text-darkgray-100 items-center rounded justify-center p-2 hover:bg-lightgray-100 dark:hover:bg-lightgray-200 hidden md:flex"
-        >
-          <FaTwitter />
+        <Link target="_blank" href={"https://twitter.com/sejarparvez"}>
+          <Button variant="ghost" size="icon">
+            <FaTwitter />
+          </Button>
         </Link>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeSwitcher />
@@ -85,7 +77,9 @@ export default function Navbar() {
           {email && image ? (
             <ProfileMenu />
           ) : (
-            <Btn text="Log in" link="/signin" />
+            <Link href="/signin">
+              <Button size="lg">Log In</Button>
+            </Link>
           )}
         </div>
         <div className="lg:hidden z-50">
