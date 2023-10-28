@@ -12,10 +12,10 @@ function Sidebar() {
   };
 
   return (
-    <div className="flex w-48 md:w-40 lg:w-48 h-[86%] flex-col items-center  rounded-2xl border dark:border-bdr-200  py-3 px-4 transition-all duration-700 justify-between">
+    <div className="flex h-[86%] flex-col items-center  rounded-2xl border dark:border-bdr-200  py-3 px-4 transition-all duration-700 justify-between">
       <div className="flex w-full max-w-xs flex-col gap-1.5 text-xl overflow-y-scroll">
         <div className="flex flex-col justify-between gap-2">
-          <div className="text-2xl font-bold py-3">Categories</div>
+          <div className="text-2xl font-bold py-3 border-b">Categories</div>
           {Options.map((category, index) => (
             <Link
               href={`/category/${category.value}`}

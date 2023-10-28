@@ -4,6 +4,8 @@ import Input from "@/components/common/input/PostInput";
 import Loading from "@/components/common/loading/Loading";
 import Categories from "@/components/common/post/Categories";
 import Content from "@/components/common/post/Content";
+import Sidebar from "@/components/layout/SideBar";
+import { Button } from "@/components/ui/button";
 import EditPostValidation from "@/components/validation/EditPostValidation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -108,43 +110,48 @@ function EditPost({ params }: PageProps) {
   }
 
   return (
-    <div className="flex gap-10 items-center justify-center my-20  flex-col border mx-1 lg:mx-10 lg:p-10 bg-slate-100 rounded-lg dark:bg-gray-800">
-      <form
-        className="flex flex-col gap-10 w-full justify-center p-2 md:p-10 lg:p-20"
-        onSubmit={UpdatePost}
-      >
-        <Input
-          label="Title"
-          id="title"
-          type="text"
-          value={title}
-          onChange={(ev) => setTitle(ev.target.value)}
-          error={errors.title}
-          maxLength={70}
-        />
-
-        <Categories
-          selectedCategory={selectedCategory}
-          onChange={(ev) => setSelectedCategory(ev.target.value)}
-          error={errors.categories}
-        />
-
-        <FileInput onChange={(ev) => setFiles(ev.target.files)} />
-
-        <Content
-          onChange={(newValue) => setContent(newValue)}
-          error={errors.content}
-          value={content}
-        />
-
-        <button
-          className={`flex items-center justify-center rounded bg-primary-200 hover:bg-gray-900 py-2 px-4 font-bold text-white dark:bg-primary-200 border ${
-            validationFailed ? "animate-shake" : ""
-          }`}
+    <div className="flex flex-col-reverse lg:flex-row">
+      <div className="hidden lg:block lg:sticky z-20 top-14 lg:left-3 lg:h-screen mt-6 mx-auto lg:mt-0">
+        <Sidebar />
+      </div>
+      <div className="flex  items-center justify-center mb-20  flex-col border mx-1 lg:mx-10 lg:p-10 rounded-xl">
+        <span className="text-2xl font-bold">Edit Post</span>
+        <form
+          className="flex flex-col gap-10 w-full justify-center p-2 md:p-10 lg:py-20"
+          onSubmit={UpdatePost}
         >
-          Update Post
-        </button>
-      </form>
+          <Input
+            label="Title"
+            id="title"
+            type="text"
+            value={title}
+            onChange={(ev) => setTitle(ev.target.value)}
+            error={errors.title}
+            maxLength={70}
+          />
+
+          <Categories
+            selectedCategory={selectedCategory}
+            onChange={(ev) => setSelectedCategory(ev.target.value)}
+            error={errors.categories}
+          />
+
+          <FileInput onChange={(ev) => setFiles(ev.target.files)} />
+
+          <Content
+            onChange={(newValue) => setContent(newValue)}
+            error={errors.content}
+            value={content}
+          />
+
+          <Button
+            size="lg"
+            className={` ${validationFailed ? "animate-shake" : ""}`}
+          >
+            Update Post
+          </Button>
+        </form>
+      </div>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );

@@ -96,10 +96,10 @@ function Featured() {
 
   return (
     <Link href={`/blog/featured/${encodedTitle}`}>
-      <div className="flex flex-col gap-8 rounded-xl lg:rounded-3xl border-b-4 border-bdr-200 dark:border-bdr-100 bg-slate-100 m-1 md:m-6  p-2 shadow-2xl transition-all duration-700 dark:bg-gray-900 md:p-4 lg:p-6 lg:flex-row">
-        <div className="flex-1 lg:order-2">
+      <div className="flex flex-col gap-8 rounded-xl lg:rounded-3xl  p-2 border md:p-4 lg:p-6 lg:flex-row">
+        <div className="flex-1 min-h-full  lg:order-2">
           <Image
-            className="h-64 w-full object-cover md:h-80 rounded"
+            className="h-full w-full object-cover rounded"
             src={`${post.coverImage}`}
             alt=""
             width={500}
@@ -107,7 +107,7 @@ function Featured() {
           />
         </div>
         <div className="relative flex flex-1 flex-col gap-5 lg:order-1">
-          <div className="text-3xl font-bold md:text-5xl dark:text-lightgray-100 text-primary-200">
+          <div className="text-3xl font-bold md:text-4xl dark:text-lightgray-100 text-primary-200">
             {post.title}
           </div>
           <div className="text-gray-500 dark:text-gray-400">

@@ -5,7 +5,6 @@ import { AlertDialogDemo } from "@/components/common/alert/Alert";
 import Loading from "@/components/common/loading/Loading";
 import CategorySection from "@/components/core/CategorySection";
 import CommentForm from "@/components/core/Comment";
-import Sidebar from "@/components/layout/SideBar";
 import { Button } from "@/components/ui/button";
 import { Blur } from "@/image/Blur";
 import { useSession } from "next-auth/react";
@@ -160,9 +159,6 @@ export default function Post({ params }: PageProps) {
       </Head>
       <div>
         <div className="flex flex-col-reverse lg:flex-row">
-          <div className="hidden lg:block lg:sticky z-20 top-14 lg:left-3 lg:h-screen mt-6 mx-auto lg:mt-0">
-            <Sidebar />
-          </div>
           <div className="flex w-full relative">
             <div className="flex flex-col lg:gap-4 mx-1 lg:mx-4">
               <div className="rounded-2xl py-1">
@@ -248,7 +244,7 @@ export default function Post({ params }: PageProps) {
                 </div>
               </div>
             </div>
-            <div className="w-full hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
+            <div className=" hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
               <div className="flex flex-col justify-between w-[14rem] h-[70%]">
                 <div className=" h-[76%] rounded-2xl ">
                   <AuthorCard
