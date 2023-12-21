@@ -1,4 +1,3 @@
-import Loading from "@/components/common/loading/Loading";
 import CategorySection from "@/components/core/CategorySection";
 import Featured from "@/components/core/Featured";
 import HotPost from "@/components/core/HotPost";
@@ -15,7 +14,6 @@ export default function Home() {
           <CategorySection />
         </div>
       </div>
-      <Loading />
     </main>
   );
 }

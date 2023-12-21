@@ -1,6 +1,5 @@
 import { FiClock, FiUser } from "react-icons/fi";
 
-import { Blur } from "@/image/Blur";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -37,26 +36,24 @@ function RecentPostModel({
   const encodedTitle = title ? encodeForUrl(title) : "";
 
   const plainTextContent = summary ? summary.replace(/<[^>]+>/g, "") : "";
-  const sum = plainTextContent.slice(0, 200);
+  const sum = plainTextContent.slice(0, 150);
 
   return (
-    <div className="flex flex-col lg:w-[78%] md:gap-20">
+    <div className="flex flex-col border p-3 rounded-2xl lg:w-[85%] md:gap-20 group hover:shadow-2xl dark:shadow-black duration-300 transition-all">
       <Link href={`/blog/${category}/${encodedTitle}`}>
-        <div className="hidden rounded-xl lg:rounded-xl border-r-4 shadow-lg border-bdr-200 dark:border-bdr-100 bg-slate-100 p-4 dark:bg-gray-900 md:block">
-          <div className="grid grid-cols-12 gap-6 md:flex-row">
-            <div className="col-span-5 h-56 ">
+        <div className="hidden rounded-xl lg:rounded-xl md:block">
+          <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-5 h-48 overflow-clip rounded-md">
               <Image
                 src={`${cover}`}
                 alt=""
-                className="h-full w-full object-cover rounded"
+                className="object-cover h-48 group-hover:scale-110 duration-300 transition-all"
                 height={500}
                 width={500}
-                placeholder="blur"
-                blurDataURL={Blur}
               />
             </div>
             <div className="col-span-7 flex flex-col justify-between gap-4">
-              <h1 className="text-3xl font-bold dark:text-darkgray-100">
+              <h1 className="text-2xl font-bold dark:text-darkgray-100">
                 {title}
               </h1>
 

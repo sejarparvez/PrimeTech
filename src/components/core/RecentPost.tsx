@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Loading from "../common/loading/Loading";
+import { Button } from "../ui/button";
 import RecentPostModel from "./RecentPostModel";
 
 interface Post {
@@ -44,7 +45,7 @@ function RecentPost() {
   );
 
   return (
-    <div className="flex flex-col items-center gap-16 my-10 m-1">
+    <div className="flex flex-col items-center gap-16 my-10">
       {isLoading ? (
         <>
           <div className="w-full">
@@ -70,22 +71,20 @@ function RecentPost() {
       {/* Pagination controls */}
       {totalPages > 1 && (
         <div className="mt-4 flex gap-4 items-center">
-          <button
+          <Button
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
             disabled={currentPage === 1}
             className={`px-4 py-2 rounded-md ${
-              currentPage === 1
-                ? "bg-gray-300 text-gray-600 cursor-not-allowed dark:bg-darkgray-200 dark:text-primary-100"
-                : "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+              currentPage === 1 ? "" : "bg-primary text-white cursor-pointer"
             }`}
           >
             Prev
-          </button>
+          </Button>
           <div className="relative">
             <select
               value={currentPage}
               onChange={(e) => setCurrentPage(Number(e.target.value))}
-              className="px-4 py-2 rounded-md bg-darkgray-100 text-gray-800 border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+              className="px-4 py-2 rounded-md bg-primary text-primary-foreground focus:outline-none"
             >
               {jumpToPageOptions.map((option) => (
                 <option key={option} value={option}>
@@ -99,25 +98,23 @@ function RecentPost() {
               key={index}
               onClick={() => setCurrentPage(index + 1)}
               className={`px-4 py-2 rounded-md ${
-                currentPage === index + 1
-                  ? "bg-primary-200 dark:bg-primary-100 dark:text-primary-200 text-white"
-                  : "bg-gray-200 hover:bg-gray-300 text-gray-800"
+                currentPage === index + 1 ? "bg-primary" : " border"
               }`}
             >
               {index + 1}
             </button>
           ))}
-          <button
+          <Button
             onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
             disabled={currentPage === totalPages}
             className={`px-4 py-2 rounded-md ${
               currentPage === totalPages
-                ? "bg-gray-300 text-gray-600 cursor-not-allowed dark:bg-darkgray-200 dark:text-primary-100"
-                : "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+                ? "bg-primary text-primary-foreground cursor-not-allowed dark:bg-darkgray-200 dark:text-primary-100"
+                : "bg-primary text-white cursor-pointer"
             }`}
           >
             Next
-          </button>
+          </Button>
         </div>
       )}
     </div>

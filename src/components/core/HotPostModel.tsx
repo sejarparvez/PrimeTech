@@ -1,4 +1,3 @@
-import { Blur } from "@/image/Blur";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -21,18 +20,18 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
   return (
     <Link
       href={`/blog/hotpost/${encodedHeading}`}
-      className="mx-auto flex items-center rounded-xl lg:rounded-3xl border-b-4 bg-slate-100 dark:bg-gray-900 dark:text-darkgray-100 shadow-2xl md:w-[45%] border-bdr-200 dark:border-bdr-100  lg:w-[30%]"
+      className="flex rounded-xl lg:rounded-2xl border group dark:shadow-black duration-300 transition-all hover:shadow-2xl"
     >
       <div className="mx-auto flex flex-col">
-        <Image
-          src={`${cover}`}
-          alt=""
-          className="h-52 rounded-xl lg:rounded-3xl"
-          height={500}
-          width={500}
-          placeholder="blur"
-          blurDataURL={Blur}
-        />
+        <div className="rounded-xl lg:rounded-2xl overflow-clip h-52">
+          <Image
+            src={`${cover}`}
+            alt=""
+            className=" group-hover:scale-110 duration-300 transition-all "
+            height={500}
+            width={500}
+          />
+        </div>
         <div className="flex flex-col gap-3 p-4">
           <div className="flex justify-between text-gray-700 dark:text-gray-300">
             <span>{author}</span>

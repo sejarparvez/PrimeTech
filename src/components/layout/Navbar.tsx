@@ -48,7 +48,7 @@ export default function Navbar() {
             href={"/"}
             className="flex text-primary-200 items-center space-x-2 text-lg md:text-lg"
           >
-            <span className=" text-black text-2xl font-extrabold dark:text-lightgray-100">
+            <span className=" text-primary text-2xl font-extrabold dark:text-lightgray-100">
               PrimeTech
             </span>
           </Link>

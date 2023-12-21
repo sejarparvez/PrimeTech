@@ -1,5 +1,6 @@
 "use client";
 import SigninInput from "@/components/common/input/SigninInput";
+import { Button } from "@/components/ui/button";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -111,11 +112,11 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center w-screen mt-20 md:mt-32 lg:mt-48 ">
-      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl md:w-10/12 w-11/12">
+    <div className="flex items-center justify-center">
+      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl  w-11/12">
         <div className="col-span-3 p-6 bg-primary-100 dark:bg-slate-400 border dark:border-none  md:rounded-l-2xl">
           <section className="flex gap-4 items-center justify-center flex-col my-8">
-            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-center text-primary-200">
+            <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-center">
               Log in to PrimeTech
             </h1>
             <span className="h-1 w-20 rounded-full bg-primary-200 flex"></span>
@@ -135,7 +136,7 @@ export default function Login() {
             </div>
             <p className="dark:text-primary-200">or use your email account</p>
             <form
-              className="flex flex-col gap-8 my-6 w-full md:w-2/3 lg:w-1/2"
+              className="flex flex-col gap-5 my-6 w-full md:w-2/3"
               onSubmit={loginUser}
             >
               <SigninInput
@@ -154,9 +155,7 @@ export default function Login() {
                 onChange={handlePasswordChange}
                 value={data.password}
               />
-              <button className="flex items-center justify-center w-full h-10  bg-primary-200 rounded-lg text-primary-100 font-bold hover:bg-gray-900">
-                Log In
-              </button>
+              <Button>Log In</Button>
               <p className="md:hidden text-center">
                 Don&apos;t have an account?
                 <Link href={"/signup"} className="text-xl font-bold pl-2">
@@ -176,9 +175,7 @@ export default function Login() {
             journey with us.
           </span>
           <Link href="/signup">
-            <button className="bg-btn-100 px-8 py-2 rounded-md text-sm text-primary-200 hover:bg-slate-200 font-bold">
-              Registration
-            </button>
+            <Button>Registration</Button>
           </Link>
         </div>
       </div>

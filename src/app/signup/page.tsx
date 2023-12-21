@@ -1,5 +1,6 @@
 "use client";
 import SigninInput from "@/components/common/input/SigninInput";
+import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -89,16 +90,16 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center w-screen mt-20 md:mt-32 lg:mt-48 ">
-      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl md:w-10/12 w-11/12">
-        <div className="col-span-3 p-6 bg-primary-100 dark:bg-slate-400 border dark:border-none  md:rounded-l-2xl">
+    <div className="flex items-center justify-center  ">
+      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl  w-11/12">
+        <div className="col-span-3 p-4 bg-primary-100 dark:bg-slate-400 border dark:border-none  md:rounded-l-2xl">
           <section className="flex gap-4 items-center justify-center flex-col my-8">
-            <h1 className="font-bold text-primary-200 text-3xl text-center">
+            <h1 className="font-bold underline text-primary-200 text-3xl text-center">
               Create New Account
             </h1>
             <span className="h-1 w-20 rounded-full bg-primary-200 flex"></span>
             <form
-              className="flex flex-col gap-8 my-6 w-full md:w-2/3 lg:w-1/2"
+              className="flex flex-col gap-5 my-6 w-full md:w-2/3 "
               onSubmit={handleSubmit}
             >
               <SigninInput
@@ -125,9 +126,7 @@ export default function Login() {
                 onChange={handlePasswordChange}
                 value={data.password}
               />
-              <button className="flex items-center justify-center w-full h-10 bg-primary-200 rounded-lg text-primary-100 font-bold hover:bg-gray-900">
-                Registration
-              </button>
+              <Button>Registration</Button>
             </form>
           </section>
           <p className="md:hidden">
@@ -151,9 +150,7 @@ export default function Login() {
             Already have an account?
           </span>
           <Link href="/signin">
-            <button className="bg-btn-100 px-8 py-2 rounded-md text-sm text-primary-200 hover:bg-slate-200 font-bold">
-              Log In
-            </button>
+            <Button>Log In</Button>
           </Link>
         </div>
       </div>

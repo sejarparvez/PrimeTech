@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "../ui/button";
 import CommentsList from "./CommentList";
 
 interface CommentFormProps {
@@ -69,7 +70,7 @@ function CommentForm({ postId }: CommentFormProps) {
               <span className="pr-2 text-xl">
                 You Are Logged In As{" "}
                 <Link href={"/dashboard"}>
-                  <span className="font-bold">{name}</span>{" "}
+                  <span className="font-bold text-primary">{name}</span>{" "}
                 </Link>
               </span>
             </span>
@@ -91,12 +92,9 @@ function CommentForm({ postId }: CommentFormProps) {
                 ></textarea>
               </div>
               <div>
-                <button
-                  className="focus:shadow-outline dark:bg-dark-400  rounded bg-black py-2 px-6 font-bold text-white focus:outline-none dark:bg-gray-700"
-                  type="submit"
-                >
+                <Button size="lg" type="submit">
                   Submit
-                </button>
+                </Button>
               </div>
             </form>
           </div>
@@ -104,7 +102,7 @@ function CommentForm({ postId }: CommentFormProps) {
           <div className="text-xl">
             You Need To{" "}
             <Link href={"/login"}>
-              <span className="font-bold">Log In</span>
+              <span className="font-bold text-primary">Log In</span>
             </Link>
           </div>
         )}

@@ -84,7 +84,7 @@ const HotPost = () => {
   }
 
   return (
-    <div className="flex flex-col m-1 flex-wrap items-center justify-center gap-8 md:flex-row">
+    <div className="grid grid-cols-3 gap-8">
       {hotPosts.map((post) => (
         <HotPostModel
           key={post.id}
