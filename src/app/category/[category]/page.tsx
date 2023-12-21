@@ -2,7 +2,7 @@
 import Loading from "@/components/common/loading/Loading";
 import CategorySection from "@/components/core/CategorySection";
 import RecentPostModel from "@/components/core/RecentPostModel";
-import Sidebar from "@/components/layout/SideBar";
+
 import { useEffect, useState } from "react";
 
 type Post = {
@@ -64,11 +64,6 @@ export default function Post({ params }: { params: { category: string } }) {
 
   return (
     <div className="flex flex-col justify-center md:flex-row md:gap-10 mt-10">
-      {isLoading ? null : (
-        <div className="hidden md:block md:sticky z-20 top-14 md:left-3 md:h-screen mt-6 mx-auto md:mt-0">
-          <Sidebar />
-        </div>
-      )}
       <div className="flex flex-col gap-10 relative">
         <div>
           <div className=" flex md:mt-10">
