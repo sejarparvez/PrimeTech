@@ -1,3 +1,4 @@
+"use client";
 import CategorySection from "@/components/core/CategorySection";
 import Featured from "@/components/core/Featured";
 import HotPost from "@/components/core/HotPost";

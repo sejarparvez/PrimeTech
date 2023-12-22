@@ -5,6 +5,9 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
+    const url = new URL(req.url);
+    const queryParams = new URLSearchParams(url.search);
+    const searchName = queryParams.get("search") || "";
     const lastUpdatedPost = await prisma.post.findFirst({
       where: {
         category: "featured",
@@ -23,9 +26,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
           },
         },
       },
-      orderBy: {
-        updatedAt: "desc",
-      },
+      orderBy: searchName ? { updatedAt: "asc" } : { updatedAt: "desc" },
     });
 
     if (lastUpdatedPost) {
