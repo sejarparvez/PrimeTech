@@ -15,7 +15,7 @@ interface Post {
   title: string;
 }
 
-const HotPost = () => {
+export default function HotPost() {
   const [hotPosts, setHotPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -94,6 +94,4 @@ const HotPost = () => {
       ))}
     </div>
   );
-};
-
-export default HotPost;
+}
