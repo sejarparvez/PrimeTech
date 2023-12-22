@@ -21,22 +21,19 @@ const HotPost = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
-    const fetchHotPosts = async () => {
-      try {
-        const response = await fetch("/api/hotpost");
-        const data = await response.json();
-        if (data.message === "No Post To Display") {
-          setErrorMessage("No hot posts to display");
-        } else {
-          setHotPosts(data);
-        }
-      } catch (error) {
-        console.log(error);
-        setErrorMessage("Error fetching hot posts");
-      }
-      setIsLoading(false);
-    };
-    fetchHotPosts();
+    setIsLoading(true);
+    fetch(`api/hotpost`)
+      .then((response) => response.json())
+      .then((data) => {
+        setHotPosts(data);
+
+        setIsLoading(false);
+      })
+      .catch(() => {
+        console.log("error");
+        setIsLoading(false);
+        setErrorMessage("Error loading posts");
+      });
   }, []);
 
   const formatDate = (dateString: string) => {

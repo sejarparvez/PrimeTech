@@ -26,6 +26,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       orderBy: {
         updatedAt: "desc",
       },
+      take: 3,
     });
 
     if (lastUpdatedPost) {
