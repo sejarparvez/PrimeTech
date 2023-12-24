@@ -5,7 +5,7 @@ import Options from "../common/post/Options";
 export default function CategorySection() {
   return (
     <div>
-      <div className="flex items-center justify-center mb-8 font-bold text-2xl decoration-wavy underline">
+      <div className="mb-8 flex items-center justify-center text-2xl font-bold">
         Categories
       </div>
       <div className="flex flex-col">
@@ -14,8 +14,8 @@ export default function CategorySection() {
             href={`/category/${category.value}`}
             key={index}
             className={`${
-              index % 2 === 0 ? "bg-slate-100 dark:bg-darkgray-200" : ""
-            } text-primary-200 dark:text-primary-100 dark:hover:text-[#007bff] hover:text-[#007bff] p-2 rounded flex items-center`}
+              index % 2 === 0 ? " bg-primary-foreground" : ""
+            } flex items-center rounded p-2`}
           >
             <MdOutlineArrowRight />
             {category.label}

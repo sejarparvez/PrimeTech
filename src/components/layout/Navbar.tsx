@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaTwitter } from "react-icons/fa";
-import { GrFacebook } from "react-icons/gr";
+import { FaSquareFacebook } from "react-icons/fa6";
 import ProfileMenu from "../profile/ProfileMenu";
 import { Button } from "../ui/button";
 import Menu from "./Menu";
@@ -40,36 +40,38 @@ export default function Navbar() {
     <header
       className={`z-50 flex h-14 w-full justify-between ${
         visible ? "opacity-100 backdrop-blur-md" : "opacity-0"
-      } transition-transform duration-500 ease-in-out bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80 items-center border-b border-bdr-100 dark:border-bdr-200 lg:px-7 px-2 fixed top-0 left-0`}
+      } border-bdr-100 dark:border-bdr-200 fixed left-0 top-0 items-center border-b bg-white bg-opacity-80 px-2 transition-transform duration-500 ease-in-out dark:bg-black dark:bg-opacity-80 lg:px-7`}
     >
-      <nav className=" text-sm font-medium flex space-x-4 [&>*]:p-2  items-center ">
+      <nav className=" flex items-center space-x-4 text-sm font-medium  [&>*]:p-2 ">
         <span>
           <Link
             href={"/"}
-            className="flex text-primary-200 items-center space-x-2 text-lg md:text-lg"
+            className="text-primary-200 flex items-center space-x-2 text-lg md:text-lg"
           >
-            <span className=" text-primary text-2xl font-extrabold dark:text-lightgray-100">
+            <span className="dark:text-lightgray-100 text-xl font-extrabold text-primary md:text-2xl">
               PrimeTech
             </span>
           </Link>
         </span>
-        <span className="hidden xl:flex items-center space-x-4 [&>*]:cursor-pointer hover:[&>*]:text-primary-200 dark:hover:[&>*]:text-lightgray-100">
+        <span className="hover:[&>*]:text-primary-200 dark:hover:[&>*]:text-lightgray-100 hidden items-center space-x-4 xl:flex [&>*]:cursor-pointer">
           <NavigationMenuDemo />
         </span>
       </nav>
 
-      <div className="flex space-x-3 md:space-x-6 items-center">
+      <div className="flex items-center space-x-3 md:space-x-6">
         <SearchBar />
-        <Link target="_blank" href={"https://facebook.com/sejarparvez"}>
-          <Button variant="ghost" size="icon">
-            <GrFacebook />
-          </Button>
-        </Link>
-        <Link target="_blank" href={"https://twitter.com/sejarparvez"}>
-          <Button variant="ghost" size="icon">
-            <FaTwitter />
-          </Button>
-        </Link>
+        <div className="hidden items-center space-x-3 md:flex">
+          <Link target="_blank" href={"https://facebook.com/sejarparvez"}>
+            <Button variant="ghost" size="icon">
+              <FaSquareFacebook />
+            </Button>
+          </Link>
+          <Link target="_blank" href={"https://twitter.com/sejarparvez"}>
+            <Button variant="ghost" size="icon">
+              <FaTwitter />
+            </Button>
+          </Link>
+        </div>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeSwitcher />
         </ThemeProvider>
@@ -82,7 +84,7 @@ export default function Navbar() {
             </Link>
           )}
         </div>
-        <div className="lg:hidden z-50">
+        <div className="z-50 lg:hidden">
           <Menu email={email} />
         </div>
       </div>

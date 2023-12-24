@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/components/common/loading/Loading";
 import RecentPostModel from "@/components/core/RecentPostModel";
+import { Button } from "@/components/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,11 +41,11 @@ export default function Dashboard() {
     posts: [],
   });
 
-  const [isLoading, setIsLoading] = useState<boolean>(true); // Initialize as true
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (status !== "authenticated") {
-      setIsLoading(false); // Set loading to false if user is not authenticated
+      setIsLoading(false);
       return;
     }
 
@@ -77,55 +78,52 @@ export default function Dashboard() {
   const image = session?.user?.image;
 
   return (
-    <div className="flex flex-col md:gap-10 mt-10">
+    <div className="flex flex-col md:gap-10">
       {!isLoading && status === "authenticated" ? (
         <div className="flex flex-col gap-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-6  w-full  bg-slate-100 dark:bg-gray-900">
-            <div className="flex items-center border justify-center col-span-3 md:col-span-1 h-full w-full">
+          <div className="grid w-full grid-cols-1 gap-10 bg-slate-100 p-6  dark:bg-gray-900  md:grid-cols-2 lg:grid-cols-3">
+            <div className="col-span-3 flex h-full w-full items-center justify-center border md:col-span-1">
               {image ? (
                 <Image
                   src={image}
                   alt=""
                   height={500}
                   width={500}
-                  className=" object-cover h-60"
+                  className=" h-60 object-cover"
                 />
               ) : (
                 "No image found"
               )}
             </div>
-            <div className="flex flex-col items-center text-center mx-auto w-full col-span-3 md:col-span-1 justify-center gap-6 px-4 md:px-0">
-              <div className="text-4xl font-bold uppercase mx-auto">{name}</div>
+            <div className="col-span-3 mx-auto flex w-full flex-col items-center justify-center gap-6 px-4 text-center md:col-span-1 md:px-0">
+              <div className="mx-auto text-4xl font-bold uppercase">{name}</div>
               <div className="text-xl">{email}</div>
             </div>
-            <div className="flex items-center gap-2 justify-center lg:flex-col md:flex-row flex-col md:gap-6  col-span-3 lg:col-span-1">
+            <div className="col-span-3 flex flex-col items-center justify-center gap-2 md:flex-row md:gap-6  lg:col-span-1 lg:flex-col">
               <div className="flex items-center justify-center">
                 <Link href={"/newpost"}>
-                  <button className="font-bold flex gap-4 items-center justify-center px-8 py-2 rounded-lg bg-primary-100 hover:bg-slate-50 text-primary-200 shadow-lg border">
+                  <Button size="lg">
                     New Post
                     <BiSolidEdit size={20} />
-                  </button>
+                  </Button>
                 </Link>
               </div>
               {id && (
                 <div>
                   <Link href={`/editprofile/?userid=${id}`}>
-                    <button className="font-bold flex gap-4 items-center justify-center px-6 py-2 rounded-lg bg-primary-200 hover:bg-gray-800 text-white border">
+                    <Button size="lg" variant="outline">
                       Edit Profile
                       <FaUserEdit size={20} />
-                    </button>
+                    </Button>
                   </Link>
                 </div>
               )}
 
               <div className="flex items-center justify-center">
-                <button
-                  onClick={handleLogout}
-                  className="font-bold flex gap-4 items-center justify-center px-10 py-2 rounded-lg bg-red-600 text-white hover:bg-red-500"
-                >
+                <Button onClick={handleLogout} size="lg" variant="destructive">
                   Log Out
                   <FaPowerOff size={14} />
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -134,12 +132,12 @@ export default function Dashboard() {
               <span className="mx-auto px-3 text-center text-2xl font-bold md:px-6 md:text-4xl ">
                 <span> Every Article Published By </span>
 
-                <span className="text-3xl font-extrabold md:text-5xl text-pink">
+                <span className="text-pink text-3xl font-extrabold md:text-5xl">
                   {name}
                 </span>
               </span>
             </div>
-            <div className="flex items-center justify-center gap-16 flex-col mt-20 mx-1 md:mx-4">
+            <div className="mx-1 mt-20 flex flex-col items-center justify-center gap-16 md:mx-4">
               {isLoading ? (
                 <>
                   <Loading />

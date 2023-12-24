@@ -76,12 +76,12 @@ export default function HotPost() {
 
   if (errorMessage) {
     return (
-      <div className="flex justify-center items-center">{errorMessage}</div>
+      <div className="flex items-center justify-center">{errorMessage}</div>
     );
   }
 
   return (
-    <div className="grid grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {hotPosts.map((post) => (
         <HotPostModel
           key={post.id}

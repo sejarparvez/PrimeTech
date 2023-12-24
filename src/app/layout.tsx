@@ -1,5 +1,4 @@
 import CategorySection from "@/components/core/CategorySection";
-
 import { SideBar } from "@/components/layout/SideBar";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -27,13 +26,13 @@ export default function RootLayout({ children, session }: RootLayoutProps) {
       <body className={inter.className}>
         <Provider session={session}>
           <Navbar />
-          <div className="lg:grid grid-cols-10 mx-2 md:mx-10 my-20 gap-6">
-            <div className="hidden lg:block lg:sticky col-span-2  z-20 top-14 lg:left-3 lg:h-screen mt-6 lg:mt-0">
+          <div className="mx-2 my-20 grid-cols-10 gap-6 md:mx-10 lg:grid">
+            <div className="top-14 z-20 col-span-2 mt-6  hidden lg:sticky lg:left-3 lg:mt-0 lg:block lg:h-screen">
               <SideBar />
             </div>
             <div className="col-span-8">{children}</div>
           </div>
-          <div className="lg:hidden">
+          <div className="mb-10 lg:hidden">
             <CategorySection />
           </div>
           <Footer />

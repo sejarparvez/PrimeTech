@@ -4,8 +4,8 @@ import Scrollspy from "react-scrollspy";
 import { Link as ScrollLink } from "react-scroll";
 export default function Documentation() {
   return (
-    <div className="flex mx-3 md:mx-4 lg:mx-40 gap-20">
-      <div className="w-3/12  flex-col gap-5 hidden md:flex fixed">
+    <div className="flex mx-3 md:mx-4  gap-20">
+      <div className="w-2/12  flex-col gap-5 hidden md:flex fixed right-0">
         <div className="font-bold text-xl">Table of contents</div>
         <Scrollspy
           items={[
@@ -55,7 +55,7 @@ export default function Documentation() {
           </li>
         </Scrollspy>
       </div>
-      <div className="flex flex-col gap-10 md:w-9/12 md:ml-60">
+      <div className="flex flex-col  gap-10 md:w-9/12">
         <div id="introduction">
           <h1 className="font-bold text-2xl mb-4">Introduction</h1>
           <p>

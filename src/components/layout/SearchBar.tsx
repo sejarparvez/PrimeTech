@@ -104,21 +104,21 @@ export default function SearchBar() {
 
   return (
     <div
-      className="relative md:border border-bdr-100 md:shadow-sm dark:border-bdr-200 py-1 pr-1 pl-4 flex gap-20 items-center justify-between rounded-md cursor-pointer"
+      className="border-bdr-100 dark:border-bdr-200 relative flex cursor-pointer items-center justify-between gap-20 rounded-md py-1 pl-4 pr-1 md:border md:shadow-sm"
       onClick={handleSearchClick}
     >
-      <div className="font-medium text-md hidden lg:block">
+      <div className="text-md hidden font-medium lg:block">
         Search PrimeTech...
       </div>
-      <div className="hidden md:flex items-center text-sm bg-lightgray-100 dark:bg-lightgray-200 gap-1 scale-90 p-0.5 rounded-sm">
+      <div className="bg-lightgray-100 dark:bg-lightgray-200 hidden scale-90 items-center gap-1 rounded-sm p-0.5 text-sm md:flex">
         <FiCommand />k
       </div>
       <div className="lg:hidden">
-        <FiSearch size={24} />
+        <FiSearch size={16} />
       </div>
       {isSearchOpen && (
-        <div className="pt-20 fixed h-screen inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 backdrop-blur-sm backdrop-filter transition-opacity duration-300 ease-in-out">
-          <div className="relative z-[999] mt-20 w-full rounded-lg bg-primary-100 dark:bg-black p-4 md:w-[30rem] mx-4">
+        <div className="fixed inset-0 z-50 flex h-screen items-start justify-center bg-black bg-opacity-70 pt-20 backdrop-blur-sm backdrop-filter transition-opacity duration-300 ease-in-out">
+          <div className="bg-primary-100 relative z-[999] mx-4 mt-20 w-full rounded-lg p-4 dark:bg-black md:w-[30rem]">
             <div className="relative">
               <input
                 ref={searchInputRef}
@@ -126,7 +126,7 @@ export default function SearchBar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded border px-2 py-1 outline-none focus:border-2 focus:border-cyan"
+                className="focus:border-cyan w-full rounded border px-2 py-1 outline-none focus:border-2"
                 placeholder="Search"
               />
               <div className="absolute right-2 top-2">
@@ -145,11 +145,11 @@ export default function SearchBar() {
                   <li key={result.id} className="border-b py-2 last:border-b-0">
                     <li
                       onClick={handleLinkClick}
-                      className="block py-2 px-4 transition-colors duration-200 ease-in-out hover:bg-gray-100"
+                      className="block px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-gray-100"
                     >
                       <Link
                         href={`/blog/${result.category}/${encodeForUrl(
-                          result.title
+                          result.title,
                         )}`}
                       >
                         {result.title}
