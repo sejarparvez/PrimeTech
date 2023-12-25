@@ -72,7 +72,7 @@ export default function Login() {
     toast.dismiss(loadingToastId);
     if (response.status !== 200) {
       toast.error(
-        "Sign-up failed. Please check your email and password. email may already exits"
+        "Sign-up failed. Please check your email and password. email may already exits",
       );
     } else {
       toast.success("Account created successfully");
@@ -83,7 +83,7 @@ export default function Login() {
   };
   if (session) {
     return (
-      <div className="flex items-center justify-center w-screen h-screen">
+      <div className="flex h-screen w-screen items-center justify-center">
         <p>You are already logged in.</p>
       </div>
     );
@@ -91,15 +91,15 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center  ">
-      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl  w-11/12">
-        <div className="col-span-3 p-4 bg-primary-100 dark:bg-slate-400 border dark:border-none  md:rounded-l-2xl">
-          <section className="flex gap-4 items-center justify-center flex-col my-8">
-            <h1 className="font-bold underline text-primary-200 text-3xl text-center">
+      <div className="grid w-11/12 grid-cols-1 justify-around rounded-2xl shadow-2xl  md:grid-cols-5">
+        <div className=" col-span-3 bg-primary-foreground  p-4  md:rounded-l-2xl">
+          <section className="my-8 flex flex-col items-center justify-center gap-4">
+            <h1 className=" text-center text-3xl font-bold underline">
               Create New Account
             </h1>
-            <span className="h-1 w-20 rounded-full bg-primary-200 flex"></span>
+            <span className=" flex h-1 w-20 rounded-full"></span>
             <form
-              className="flex flex-col gap-5 my-6 w-full md:w-2/3 "
+              className="my-6 flex w-full flex-col gap-5 md:w-2/3 "
               onSubmit={handleSubmit}
             >
               <SigninInput
@@ -135,22 +135,22 @@ export default function Login() {
               Login
             </Link>
           </p>
-          <div className="flex items-center dark:text-slate-50 justify-center mt-10 gap-4">
+          <div className="mt-10 flex items-center justify-center gap-4 dark:text-slate-50">
             <Link href={"/policy"}>Privacy Policy</Link>
             <SiPolkadot />
             <Link href={"/terms"}>Terms & Condtions</Link>
           </div>
         </div>
-        <div className="hidden md:flex bg-primary-200 dark:bg-gray-800 col-span-2  md:rounded-r-2xl gap-4 p-16 items-center justify-center text-center flex-col">
-          <span className="font-bold text-3xl text-lightgray-100">
+        <div className="bg-primary-200 col-span-2 hidden flex-col items-center  justify-center gap-4 p-16 text-center dark:bg-gray-900  md:flex md:rounded-r-2xl">
+          <span className="text-lightgray-100 text-3xl font-bold">
             Hi, There!
           </span>
-          <span className="h-1 w-20 rounded-full bg-lightgray-100 flex"></span>
+          <span className="bg-lightgray-100 flex h-1 w-20 rounded-full"></span>
           <span className="text-darkgray-100 my-4">
             Already have an account?
           </span>
           <Link href="/signin">
-            <Button>Log In</Button>
+            <Button className="px-10">Log In</Button>
           </Link>
         </div>
       </div>

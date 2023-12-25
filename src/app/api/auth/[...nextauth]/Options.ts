@@ -3,23 +3,15 @@ import bcrypt from "bcrypt";
 import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider from "next-auth/providers/github";
 
 const prisma = new PrismaClient();
-
-const githubClientId = process.env.GITHUB_CLIENT_ID;
-const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
-
-if (!githubClientId || !githubClientSecret) {
-  throw new Error("GitHub credentials are missing.");
-}
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: { label: "Username", type: "text", placeholder: "user name" },
         password: { label: "Password", type: "password" },
         email: { label: "email", type: "email" },
       },
@@ -34,14 +26,13 @@ export const authOptions = {
           },
         });
 
-        console.log(credentials.email);
         if (!user) {
           return null;
         }
         if (user.password) {
-          const passwordMatch = await bcrypt.compareSync(
+          const passwordMatch = bcrypt.compareSync(
             credentials.password,
-            user.password
+            user.password,
           );
           if (!passwordMatch) {
             return null;
@@ -50,10 +41,6 @@ export const authOptions = {
 
         return user;
       },
-    }),
-    GitHubProvider({
-      clientId: githubClientId,
-      clientSecret: githubClientSecret,
     }),
   ],
   callbacks: {

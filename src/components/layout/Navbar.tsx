@@ -76,11 +76,11 @@ export default function Navbar() {
           <ThemeSwitcher />
         </ThemeProvider>
         <div className="hidden md:block">
-          {email && image ? (
+          {email ? (
             <ProfileMenu />
           ) : (
             <Link href="/signin">
-              <Button size="lg">Log In</Button>
+              <Button className="px-8">Log In</Button>
             </Link>
           )}
         </div>
