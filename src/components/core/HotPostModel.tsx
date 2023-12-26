@@ -23,7 +23,7 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
       className="group flex rounded-xl border transition-all duration-300 hover:shadow-2xl dark:shadow-black lg:rounded-2xl"
     >
       <div className="mx-auto flex flex-col">
-        <div className="h-52 overflow-clip rounded-xl lg:rounded-2xl">
+        <div className="h-40 overflow-clip rounded-xl md:h-48 lg:h-52 lg:rounded-2xl">
           <Image
             src={`${cover}`}
             alt=""
@@ -32,12 +32,12 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
             width={500}
           />
         </div>
-        <div className="flex flex-col gap-3 p-4">
-          <div className="flex justify-between text-gray-700 dark:text-gray-300">
+        <div className="flex flex-col gap-3 p-2 md:p-4">
+          <div className="flex justify-between text-gray-500 dark:text-gray-300">
             <span>{author}</span>
             <span>{time}</span>
           </div>
-          <span className="text-2xl font-bold text-primary transition-colors duration-300">
+          <span className="text-xl font-bold text-primary transition-colors duration-300 md:text-2xl">
             {heading}
           </span>
         </div>

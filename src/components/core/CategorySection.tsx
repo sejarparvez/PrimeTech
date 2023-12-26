@@ -14,7 +14,7 @@ export default function CategorySection() {
             href={`/category/${category.value}`}
             key={index}
             className={`${
-              index % 2 === 0 ? " bg-primary-foreground" : ""
+              index % 2 === 0 ? " bg-secondary" : ""
             } flex items-center rounded p-2`}
           >
             <MdOutlineArrowRight />

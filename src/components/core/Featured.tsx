@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Loading from "../common/loading/Loading";
+import { Card } from "../ui/card";
 
 function Featured() {
   const [post, setPost] = useState<Post | null>(null);
@@ -96,28 +97,28 @@ function Featured() {
 
   return (
     <Link href={`/blog/featured/${encodedTitle}`}>
-      <div className="group flex flex-col gap-8 rounded-xl border p-2 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:p-4 lg:flex-row lg:rounded-3xl lg:p-6">
+      <Card className="group flex flex-col gap-2 rounded-xl border p-2 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:gap-8 md:p-4 lg:flex-row lg:rounded-3xl lg:p-6">
         <div className="w-full flex-1 overflow-clip rounded-lg  lg:order-2">
           <Image
-            className="h-80 w-full object-cover transition-all duration-300 group-hover:scale-105"
+            className="h-44 w-full object-cover transition-all duration-300 group-hover:scale-105 md:h-60 lg:h-80"
             src={`${post.coverImage}`}
             alt=""
             width={500}
             height={500}
           />
         </div>
-        <div className="relative flex flex-1 flex-col gap-5 lg:order-1">
-          <div className=" text-3xl font-bold text-primary transition-colors duration-300 md:text-4xl">
+        <div className="relative flex flex-1 flex-col gap-2 md:gap-5 lg:order-1">
+          <div className="text-xl font-bold text-primary transition-colors duration-300 md:text-3xl lg:text-4xl">
             {post.title}
           </div>
-          <div className="text-gray-600 dark:text-gray-400">
+          <div className="text-sm text-gray-500  dark:text-gray-400">
             {post.author?.name} || {formatDate(post?.updatedAt)}
           </div>
-          <div className=" bottom-5 text-gray-700 dark:text-gray-400 lg:bottom-0">
+          <div className=" bottom-5 text-gray-800 dark:text-gray-400 lg:bottom-0">
             {summary}...
           </div>
         </div>
-      </div>
+      </Card>
     </Link>
   );
 }

@@ -1,30 +1,28 @@
 .post-content {
-  padding: 10px;
+  @apply py-2;
 }
 
 .post-content h1 {
-  @apply text-4xl py-8 font-extrabold;
+  @apply py-4 text-3xl font-extrabold;
 }
 
 .post-content h2 {
-  @apply text-3xl py-6 font-bold;
+  @apply py-4 text-2xl font-bold;
 }
 
 .post-content h3 {
-  @apply text-2xl py-5 font-bold;
+  @apply py-3 text-xl font-bold;
 }
 
 .post-content h4 {
-  @apply text-xl py-4 font-semibold;
-}
-
-.post-content p {
-  margin-bottom: 10px;
-  line-height: 1.6;
+  @apply py-2 text-xl font-semibold;
 }
 
 .post-content a {
-  @apply underline text-[#007bff] font-semibold;
+  @apply font-semibold text-primary;
+}
+.post-content p {
+  @apply py-1;
 }
 
 .post-content ul,
@@ -35,6 +33,7 @@
 
 .post-content li {
   margin-bottom: 6px;
+  list-style-type: disc;
 }
 
 .post-content blockquote {

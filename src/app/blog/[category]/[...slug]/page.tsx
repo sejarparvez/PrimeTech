@@ -3,7 +3,6 @@
 import AuthorCard from "@/components/card/AuthorCard";
 import { AlertDialogDemo } from "@/components/common/alert/Alert";
 import Loading from "@/components/common/loading/Loading";
-import CategorySection from "@/components/core/CategorySection";
 import CommentForm from "@/components/core/Comment";
 import { Button } from "@/components/ui/button";
 import { Blur } from "@/image/Blur";
@@ -160,10 +159,10 @@ export default function Post({ params }: PageProps) {
       <div>
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="relative flex w-full">
-            <div className="mx-1 flex flex-col lg:mx-4 lg:gap-4">
+            <div className="flex flex-col lg:mx-4 lg:gap-4">
               <div className="rounded-2xl py-1">
-                <div className="mb-10 rounded-lg  px-2 py-4 md:px-4">
-                  <h1 className="mb-4 text-3xl font-extrabold text-primary md:text-4xl">
+                <div className="rounded-lg md:mb-10  md:py-4 ">
+                  <h1 className="mb-4 text-xl font-extrabold text-primary md:text-2xl lg:text-3xl">
                     {post.title}
                   </h1>
                   <div className="flex flex-col gap-4 md:flex-row md:justify-between">
@@ -186,7 +185,7 @@ export default function Post({ params }: PageProps) {
                     <div>
                       <Link href={`/category/${post.category}`}>
                         {" "}
-                        <button className="bg-primary-200 dark:text-primary-200 dark:bg-primary-100 mr-10 rounded-br-2xl rounded-tl-2xl px-4 py-1 font-bold text-white">
+                        <button className="dark:text-primary-200 mr-10 rounded-br-2xl rounded-tl-2xl bg-primary px-4 py-1 font-bold text-white">
                           {formattedCategory}
                         </button>
                       </Link>
@@ -222,7 +221,7 @@ export default function Post({ params }: PageProps) {
                   blurDataURL={Blur}
                 />
                 <div
-                  className={`mb-12 mt-10 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
+                  className={`mb-12 mt-4 rounded-lg md:mt-16 md:text-lg ${styles["post-content"]}`}
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </div>
@@ -259,9 +258,6 @@ export default function Post({ params }: PageProps) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="lg:hidden">
-          <CategorySection />
         </div>
       </div>
     </>

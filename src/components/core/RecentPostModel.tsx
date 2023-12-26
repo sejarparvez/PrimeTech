@@ -39,7 +39,7 @@ function RecentPostModel({
   const sum = plainTextContent.slice(0, 150);
 
   return (
-    <div className="group flex flex-col rounded-2xl border p-3 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:gap-20 lg:w-[85%]">
+    <div className="group flex flex-col rounded-2xl border p-2 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:gap-20 lg:w-[85%]">
       <Link href={`/blog/${category}/${encodedTitle}`}>
         <div className="hidden rounded-xl md:block lg:rounded-xl">
           <div className="grid grid-cols-12 gap-6">
@@ -74,17 +74,19 @@ function RecentPostModel({
           </div>
         </div>
       </Link>
-      <div className="border-primary-200 dark:border-primary-100 mx-auto w-full rounded-xl border-b-4 bg-slate-100 p-3 dark:bg-gray-900 md:hidden">
+      <div className="mx-auto w-full  md:hidden">
         <Link href={`/blog/${category}/${encodedTitle}`}>
           <div className="flex flex-col">
             <div className="flex flex-col gap-4 md:relative">
-              <h1 className="text-2xl font-bold text-primary">{title}</h1>
+              <h1 className="text-xl font-bold text-primary md:text-2xl">
+                {title}
+              </h1>
 
               <div>
                 <Image
                   src={`${cover}`}
                   alt=""
-                  className="float-left mr-4 h-24 w-40"
+                  className="float-left mr-2 h-20 w-32"
                   height={500}
                   width={500}
                 />
