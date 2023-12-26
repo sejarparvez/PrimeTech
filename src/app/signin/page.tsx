@@ -76,30 +76,6 @@ export default function Login() {
     }
   };
 
-  const handleGitHubLogin = async () => {
-    try {
-      const loadingToastId = toast.loading("Logging in with GitHub...", {
-        autoClose: false,
-        theme: "dark",
-      });
-
-      const response = await signIn("github", {
-        callbackUrl: `${window.location.origin}/dashboard`,
-      });
-
-      toast.dismiss(loadingToastId);
-
-      if (response?.error) {
-        toast.error("GitHub sign-in failed.");
-      }
-
-      return response;
-    } catch (error) {
-      console.error("GitHub sign-in error:", error);
-      throw error;
-    }
-  };
-
   if (session) {
     return (
       <div>
@@ -113,30 +89,27 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="grid md:grid-cols-5 grid-cols-1 rounded-2xl justify-around shadow-2xl  w-11/12">
-        <div className="col-span-3 p-6 bg-primary-100 dark:bg-slate-400 border dark:border-none  md:rounded-l-2xl">
-          <section className="flex gap-4 items-center justify-center flex-col my-8">
-            <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-center">
+      <div className="grid w-11/12 grid-cols-1 justify-around rounded-2xl shadow-2xl  md:grid-cols-5">
+        <div className="col-span-3 bg-slate-300 p-6 dark:bg-slate-700  md:rounded-l-2xl">
+          <section className="my-8 flex flex-col items-center justify-center gap-4">
+            <h1 className="text-center text-2xl font-bold md:text-3xl lg:text-4xl">
               Log in to PrimeTech
             </h1>
-            <span className="h-1 w-20 rounded-full bg-primary-200 flex"></span>
-            <div className="flex gap-6 my-3">
-              <span className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border">
+            <span className="bg-primary-200 flex h-1 w-20 rounded-full"></span>
+            <div className="my-3 flex gap-6">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary text-primary dark:border-white dark:text-white">
                 <FaFacebookF />
               </span>
-              <span className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary text-primary dark:border-white dark:text-white">
                 <FaTwitter />
               </span>
-              <span
-                className="flex items-center text-primary-200 dark:border-primary-200 justify-center h-10 w-10 rounded-full border"
-                onClick={handleGitHubLogin}
-              >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary text-primary dark:border-white dark:text-white">
                 <FaGithub />
               </span>
             </div>
             <p className="dark:text-primary-200">or use your email account</p>
             <form
-              className="flex flex-col gap-5 my-6 w-full md:w-2/3"
+              className="my-6 flex w-full flex-col gap-5 md:w-2/3"
               onSubmit={loginUser}
             >
               <SigninInput
@@ -156,20 +129,20 @@ export default function Login() {
                 value={data.password}
               />
               <Button>Log In</Button>
-              <p className="md:hidden text-center">
+              <p className="text-center md:hidden">
                 Don&apos;t have an account?
-                <Link href={"/signup"} className="text-xl font-bold pl-2">
+                <Link href={"/signup"} className="pl-2 text-xl font-bold">
                   Register
                 </Link>
               </p>
             </form>
           </section>
         </div>
-        <div className="hidden md:flex bg-primary-200 dark:bg-gray-800 col-span-2  md:rounded-r-2xl gap-4 p-16 items-center justify-center text-center flex-col">
-          <span className="font-bold text-3xl text-lightgray-100">
+        <div className="col-span-2 hidden flex-col items-center justify-center gap-4  bg-slate-800 p-16 text-center text-white  md:flex md:rounded-r-2xl">
+          <span className="text-lightgray-100 text-3xl font-bold">
             Hi, There!
           </span>
-          <span className="h-1 w-20 rounded-full bg-lightgray-100 flex"></span>
+          <span className="bg-lightgray-100 flex h-1 w-20 rounded-full"></span>
           <span className="text-darkgray-100 my-4">
             New to PrimeTech? Let&#39;s create a free account to start your
             journey with us.

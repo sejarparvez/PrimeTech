@@ -96,10 +96,10 @@ function Featured() {
 
   return (
     <Link href={`/blog/featured/${encodedTitle}`}>
-      <div className="flex flex-col group gap-8 rounded-xl lg:rounded-3xl hover:shadow-2xl duration-300 transition-all dark:shadow-black p-2 border md:p-4 lg:p-6 lg:flex-row">
-        <div className="flex-1 w-full rounded-lg overflow-clip  lg:order-2">
+      <div className="group flex flex-col gap-8 rounded-xl border p-2 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:p-4 lg:flex-row lg:rounded-3xl lg:p-6">
+        <div className="w-full flex-1 overflow-clip rounded-lg  lg:order-2">
           <Image
-            className="h-80 w-full object-cover group-hover:scale-105 duration-300 transition-all"
+            className="h-80 w-full object-cover transition-all duration-300 group-hover:scale-105"
             src={`${post.coverImage}`}
             alt=""
             width={500}
@@ -107,13 +107,15 @@ function Featured() {
           />
         </div>
         <div className="relative flex flex-1 flex-col gap-5 lg:order-1">
-          <div className="text-3xl font-bold md:text-4xl dark:text-lightgray-100 text-primary-200">
+          <div className=" text-3xl font-bold text-primary transition-colors duration-300 md:text-4xl">
             {post.title}
           </div>
-          <div className="text-gray-500 dark:text-gray-400">
+          <div className="text-gray-600 dark:text-gray-400">
             {post.author?.name} || {formatDate(post?.updatedAt)}
           </div>
-          <div className="text-dark-300 bottom-5 lg:bottom-0">{summary}...</div>
+          <div className=" bottom-5 text-gray-700 dark:text-gray-400 lg:bottom-0">
+            {summary}...
+          </div>
         </div>
       </div>
     </Link>

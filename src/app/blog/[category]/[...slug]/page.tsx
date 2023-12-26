@@ -159,11 +159,11 @@ export default function Post({ params }: PageProps) {
       </Head>
       <div>
         <div className="flex flex-col-reverse lg:flex-row">
-          <div className="flex w-full relative">
-            <div className="flex flex-col lg:gap-4 mx-1 lg:mx-4">
+          <div className="relative flex w-full">
+            <div className="mx-1 flex flex-col lg:mx-4 lg:gap-4">
               <div className="rounded-2xl py-1">
-                <div className="mb-10 rounded-lg  py-4 px-2 md:px-4">
-                  <h1 className="mb-4 text-3xl md:text-4xl text-primary-200 dark:text-lightgray-100 font-extrabold">
+                <div className="mb-10 rounded-lg  px-2 py-4 md:px-4">
+                  <h1 className="mb-4 text-3xl font-extrabold text-primary md:text-4xl">
                     {post.title}
                   </h1>
                   <div className="flex flex-col gap-4 md:flex-row md:justify-between">
@@ -172,7 +172,7 @@ export default function Post({ params }: PageProps) {
                         <span className="text-sm ">
                           This Post Last Was Updated By{" "}
                           <Link href={`/users/${post.author.id}`}>
-                            <span className="px-1 text-lg font-medium ">
+                            <span className="px-1 text-lg font-medium text-primary">
                               {post.author.name}
                             </span>{" "}
                           </Link>
@@ -186,7 +186,7 @@ export default function Post({ params }: PageProps) {
                     <div>
                       <Link href={`/category/${post.category}`}>
                         {" "}
-                        <button className="mr-10 rounded-tl-2xl rounded-br-2xl bg-primary-200 px-4 py-1 font-bold text-white dark:text-primary-200 dark:bg-primary-100">
+                        <button className="bg-primary-200 dark:text-primary-200 dark:bg-primary-100 mr-10 rounded-br-2xl rounded-tl-2xl px-4 py-1 font-bold text-white">
                           {formattedCategory}
                         </button>
                       </Link>
@@ -194,7 +194,7 @@ export default function Post({ params }: PageProps) {
                   </div>
                   <div className="mt-6 flex flex-col items-center gap-6 md:flex-row">
                     {userInfo === post.author.email && (
-                      <div className="mx-auto flex items-center justify-center md:justify-end gap-4">
+                      <div className="mx-auto flex items-center justify-center gap-4 md:justify-end">
                         <div>
                           <Link
                             href={`/editpost/${params.category}/${params.slug}`}
@@ -213,7 +213,7 @@ export default function Post({ params }: PageProps) {
                   </div>
                 </div>
                 <Image
-                  className="mx-auto rounded-lg w-full object-cover h-60 md:h-96"
+                  className="mx-auto h-60 w-full rounded-lg object-cover md:h-96"
                   src={`${post.coverImage}`}
                   alt=""
                   width={1000}
@@ -222,15 +222,15 @@ export default function Post({ params }: PageProps) {
                   blurDataURL={Blur}
                 />
                 <div
-                  className={`mt-10 mb-12 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
+                  className={`mb-12 mt-10 rounded-lg md:mx-0 md:mt-16 md:text-lg ${styles["post-content"]}`}
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </div>
               <div className="my-20">
                 <CommentForm postId={post.id} />
               </div>
-              <div className="w-full lg:hidden -right-10 rounded-lg  md:top-14 md:h-[86%] border dark:border-bdr-200">
-                <div className="flex flex-col justify-between h-[70%]">
+              <div className="dark:border-bdr-200 -right-10 w-full rounded-lg  border md:top-14 md:h-[86%] lg:hidden">
+                <div className="flex h-[70%] flex-col justify-between">
                   <div className=" h-[76%] rounded-2xl ">
                     <AuthorCard
                       id={post.author.id}
@@ -238,14 +238,14 @@ export default function Post({ params }: PageProps) {
                       image={post.author.image}
                     />
                   </div>
-                  <div className=" rounded-xl  h-80 flex items-center justify-center">
+                  <div className=" flex  h-80 items-center justify-center rounded-xl">
                     Advertise
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" hidden h-[20rem] lg:h-[35rem] lg:block right-2 rounded-lg lg:sticky md:top-14 mb-6 border dark:border-bdr-200">
-              <div className="flex flex-col justify-between w-[14rem] h-[70%]">
+            <div className=" dark:border-bdr-200 right-2 mb-6 hidden h-[20rem] rounded-lg border md:top-14 lg:sticky lg:block lg:h-[35rem]">
+              <div className="flex h-[70%] w-[14rem] flex-col justify-between">
                 <div className=" h-[76%] rounded-2xl ">
                   <AuthorCard
                     id={post.author.id}
@@ -253,7 +253,7 @@ export default function Post({ params }: PageProps) {
                     image={post.author.image}
                   />
                 </div>
-                <div className=" rounded-xl  h-80 flex items-center justify-center">
+                <div className=" flex  h-80 items-center justify-center rounded-xl">
                   Advertise
                 </div>
               </div>

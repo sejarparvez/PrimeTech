@@ -20,14 +20,14 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
   return (
     <Link
       href={`/blog/hotpost/${encodedHeading}`}
-      className="flex rounded-xl lg:rounded-2xl border group dark:shadow-black duration-300 transition-all hover:shadow-2xl"
+      className="group flex rounded-xl border transition-all duration-300 hover:shadow-2xl dark:shadow-black lg:rounded-2xl"
     >
       <div className="mx-auto flex flex-col">
-        <div className="rounded-xl lg:rounded-2xl overflow-clip h-52">
+        <div className="h-52 overflow-clip rounded-xl lg:rounded-2xl">
           <Image
             src={`${cover}`}
             alt=""
-            className=" group-hover:scale-110 duration-300 transition-all "
+            className=" transition-all duration-300 group-hover:scale-110 "
             height={500}
             width={500}
           />
@@ -37,7 +37,9 @@ const HotPostModel: React.FC<Props> = ({ cover, author, time, heading }) => {
             <span>{author}</span>
             <span>{time}</span>
           </div>
-          <span className="text-2xl font-bold">{heading}</span>
+          <span className="text-2xl font-bold text-primary transition-colors duration-300">
+            {heading}
+          </span>
         </div>
       </div>
     </Link>

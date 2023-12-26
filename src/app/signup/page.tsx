@@ -92,7 +92,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center  ">
       <div className="grid w-11/12 grid-cols-1 justify-around rounded-2xl shadow-2xl  md:grid-cols-5">
-        <div className=" col-span-3 bg-primary-foreground  p-4  md:rounded-l-2xl">
+        <div className=" col-span-3 bg-slate-300 p-4  dark:bg-slate-700  md:rounded-l-2xl">
           <section className="my-8 flex flex-col items-center justify-center gap-4">
             <h1 className=" text-center text-3xl font-bold underline">
               Create New Account
@@ -141,7 +141,7 @@ export default function Login() {
             <Link href={"/terms"}>Terms & Condtions</Link>
           </div>
         </div>
-        <div className="bg-primary-200 col-span-2 hidden flex-col items-center  justify-center gap-4 p-16 text-center dark:bg-gray-900  md:flex md:rounded-r-2xl">
+        <div className=" col-span-2 hidden flex-col items-center justify-center  gap-4 bg-slate-800 p-16 text-center text-white md:flex md:rounded-r-2xl">
           <span className="text-lightgray-100 text-3xl font-bold">
             Hi, There!
           </span>

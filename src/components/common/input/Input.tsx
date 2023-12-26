@@ -24,12 +24,12 @@ const Input: React.FC<FormInputProps> = ({
           value={value}
           onChange={onChange}
           id={id}
-          className="flex w-full px-2.5 border pb-2.5 pt-4 text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none  focus:outline-none  peer"
+          className="peer flex w-full appearance-none rounded-lg border border-primary bg-transparent px-2.5 pb-2.5 pt-4 text-sm  focus:outline-none  dark:border-white"
           placeholder=""
         />
         <label
           htmlFor={id}
-          className="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-slate-400 dark:text-primary-200 px-2 peer-focus:px-2 peer-focus:text-black  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75  left-1"
+          className="dark:text-primary-200 absolute left-1  top-2 z-10 origin-[0] -translate-y-4 scale-75 transform bg-slate-300 px-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2  peer-placeholder-shown:scale-100 peer-focus:top-0 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-black  dark:bg-slate-700 dark:peer-focus:text-white"
         >
           {label}
         </label>

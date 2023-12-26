@@ -39,21 +39,21 @@ function RecentPostModel({
   const sum = plainTextContent.slice(0, 150);
 
   return (
-    <div className="flex flex-col border p-3 rounded-2xl lg:w-[85%] md:gap-20 group hover:shadow-2xl dark:shadow-black duration-300 transition-all">
+    <div className="group flex flex-col rounded-2xl border p-3 transition-all duration-300 hover:shadow-2xl dark:shadow-black md:gap-20 lg:w-[85%]">
       <Link href={`/blog/${category}/${encodedTitle}`}>
-        <div className="hidden rounded-xl lg:rounded-xl md:block">
+        <div className="hidden rounded-xl md:block lg:rounded-xl">
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-5 h-48 overflow-clip rounded-md">
               <Image
                 src={`${cover}`}
                 alt=""
-                className="object-cover h-48 group-hover:scale-110 duration-300 transition-all"
+                className="h-48 object-cover transition-all duration-300 group-hover:scale-110"
                 height={500}
                 width={500}
               />
             </div>
             <div className="col-span-7 flex flex-col justify-between gap-4">
-              <h1 className="text-2xl font-bold dark:text-darkgray-100">
+              <h1 className="text-2xl font-bold text-primary transition-colors duration-300">
                 {title}
               </h1>
 
@@ -74,11 +74,11 @@ function RecentPostModel({
           </div>
         </div>
       </Link>
-      <div className="mx-auto w-full rounded-xl border-b-4 border-primary-200 dark:border-primary-100 bg-slate-100 p-3 dark:bg-gray-900 md:hidden">
+      <div className="border-primary-200 dark:border-primary-100 mx-auto w-full rounded-xl border-b-4 bg-slate-100 p-3 dark:bg-gray-900 md:hidden">
         <Link href={`/blog/${category}/${encodedTitle}`}>
           <div className="flex flex-col">
             <div className="flex flex-col gap-4 md:relative">
-              <h1 className="text-2xl font-bold">{title}</h1>
+              <h1 className="text-2xl font-bold text-primary">{title}</h1>
 
               <div>
                 <Image
