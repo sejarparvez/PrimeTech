@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { TbBrandAzure } from "react-icons/tb";
-import Btn from "../common/button/Btn";
+import { Button } from "../ui/button";
 
 export default function Menu({ email }: { email: string | null | undefined }) {
   const [NavOpen, setNavOpen] = useState(false);
@@ -63,9 +63,13 @@ export default function Menu({ email }: { email: string | null | undefined }) {
           <hr />
           <div className="px-8 py-6" onClick={HandleClick}>
             {email ? (
-              <Btn text="Dashboard" link="/dashboard" />
+              <Link href="/dashboard">
+                <Button>Dashboard</Button>
+              </Link>
             ) : (
-              <Btn text="Log in" link="/signin" />
+              <Link href="/signin">
+                <Button>Log in</Button>
+              </Link>
             )}
           </div>
         </div>

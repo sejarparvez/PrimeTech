@@ -63,15 +63,15 @@ export default function Post({ params }: { params: { category: string } }) {
   const formattedCategory = formatString(inputString);
 
   return (
-    <div className="flex flex-col justify-center md:flex-row md:gap-10 mt-10">
-      <div className="flex flex-col gap-10 relative">
+    <div className="mt-10 flex flex-col justify-center md:flex-row md:gap-10">
+      <div className="relative flex flex-col gap-10">
         <div>
           <div className=" flex md:mt-10">
             <span className="mx-auto  px-3 text-center text-2xl font-bold md:px-6 md:text-4xl ">
               {formattedCategory}
             </span>
           </div>
-          <div className="flex items-center justify-center gap-16 flex-col mt-20 mx-1 md:mx-4">
+          <div className="mx-1 mt-20 flex flex-col items-center justify-center gap-16 md:mx-4">
             {isLoading ? (
               <>
                 <Loading />
@@ -96,18 +96,18 @@ export default function Post({ params }: { params: { category: string } }) {
         </div>
         {/* Pagination controls */}
         {totalPages > 1 && (
-          <div className="mt-4 flex gap-4 items-center">
+          <div className="mt-4 flex items-center gap-4">
             <button
               onClick={() =>
                 setCurrentPage((prevPage) =>
-                  prevPage > 1 ? prevPage - 1 : prevPage
+                  prevPage > 1 ? prevPage - 1 : prevPage,
                 )
               }
               disabled={currentPage === 1}
-              className={`px-4 py-2 rounded-md ${
+              className={`rounded-md px-4 py-2 ${
                 currentPage === 1
-                  ? "bg-gray-300 text-gray-600 cursor-not-allowed dark:bg-darkgray-200 dark:text-primary-100"
-                  : "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+                  ? "dark:bg-darkgray-200 dark:text-primary-100 cursor-not-allowed bg-gray-300 text-gray-600"
+                  : "cursor-pointer bg-blue-500 text-white hover:bg-blue-600"
               }`}
             >
               Prev
@@ -116,7 +116,7 @@ export default function Post({ params }: { params: { category: string } }) {
               <select
                 value={currentPage}
                 onChange={(e) => setCurrentPage(Number(e.target.value))}
-                className="px-4 py-2 rounded-md bg-darkgray-100 text-gray-800 border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+                className="bg-darkgray-100 rounded-md border border-gray-300 px-4 py-2 text-gray-800 focus:border-blue-500 focus:outline-none focus:ring"
               >
                 {Array.from({ length: totalPages }, (_, index) => (
                   <option key={index + 1} value={index + 1}>
@@ -128,14 +128,14 @@ export default function Post({ params }: { params: { category: string } }) {
             <button
               onClick={() =>
                 setCurrentPage((prevPage) =>
-                  prevPage < totalPages ? prevPage + 1 : prevPage
+                  prevPage < totalPages ? prevPage + 1 : prevPage,
                 )
               }
               disabled={currentPage === totalPages}
-              className={`px-4 py-2 rounded-md ${
+              className={`rounded-md px-4 py-2 ${
                 currentPage === totalPages
-                  ? "bg-gray-300 text-gray-600 cursor-not-allowed dark:bg-darkgray-200 dark:text-primary-100"
-                  : "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+                  ? "dark:bg-darkgray-200 dark:text-primary-100 cursor-not-allowed bg-gray-300 text-gray-600"
+                  : "cursor-pointer bg-blue-500 text-white hover:bg-blue-600"
               }`}
             >
               Next
@@ -143,7 +143,7 @@ export default function Post({ params }: { params: { category: string } }) {
           </div>
         )}
       </div>
-      <div className="md:hidden mt-20">
+      <div className="mt-20 md:hidden">
         <CategorySection />
       </div>
     </div>
