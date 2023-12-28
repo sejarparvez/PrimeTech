@@ -28,8 +28,8 @@ export default function PaginationUi({
         {[...Array(totalPages).keys()].map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
-              onClick={() => setCurrentPage(page + 1)}
               isActive={currentPage === page + 1}
+              href={`/blog/page/${page + 1}`}
             >
               {page + 1}
             </PaginationLink>
