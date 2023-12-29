@@ -118,7 +118,7 @@ export default function SearchBar() {
       </div>
       {isSearchOpen && (
         <div className="fixed inset-0 z-50 flex h-screen items-start justify-center bg-black bg-opacity-70 pt-20 backdrop-blur-sm backdrop-filter transition-opacity duration-300 ease-in-out">
-          <div className="bg-primary-100 relative z-[999] mx-4 mt-20 w-full rounded-lg p-4 dark:bg-black md:w-[30rem]">
+          <div className=" relative z-[999] mx-4 mt-20 w-full rounded-lg bg-secondary p-4  md:w-[30rem]">
             <div className="relative">
               <input
                 ref={searchInputRef}
@@ -126,7 +126,7 @@ export default function SearchBar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="focus:border-cyan w-full rounded border px-2 py-1 outline-none focus:border-2"
+                className="w-full rounded border px-2 py-1 outline-none focus:border-2"
                 placeholder="Search"
               />
               <div className="absolute right-2 top-2">
@@ -134,9 +134,9 @@ export default function SearchBar() {
               </div>
             </div>
             {isLoading ? (
-              <p className="mt-4 text-gray-500">Loading...</p>
+              <p className="mt-4">Loading...</p>
             ) : searchQuery === "" ? (
-              <p className="mt-4 text-gray-500">
+              <p className="mt-4">
                 Type minimum 3 character to see the search results.
               </p>
             ) : searchResults.length > 0 ? (
@@ -145,7 +145,7 @@ export default function SearchBar() {
                   <li key={result.id} className="border-b py-2 last:border-b-0">
                     <li
                       onClick={handleLinkClick}
-                      className="block px-4 py-2 transition-colors duration-200 ease-in-out hover:bg-gray-100"
+                      className="block px-4 py-2 transition-colors duration-200 ease-in-out hover:underline"
                     >
                       <Link
                         href={`/blog/${result.category}/${encodeForUrl(
